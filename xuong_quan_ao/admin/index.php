@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../commons/env.php';
 require_once '../commons/function.php';
 require_once './models/AdminDanhMuc.php';
@@ -20,8 +21,8 @@ match($act){
     'sanpham' =>(new AdminSanPhamController())->danhSachSanPham(),
     'formthemsanpham' =>(new AdminSanPhamController())->formAddSanPham(),
     'themsanpham' =>(new AdminSanPhamController())->postAddSanPham(),
-    // 'formsuasanpham' =>(new AdminSanPhamController())->formEditSanPham(),
-    // 'suasanpham' =>(new AdminSanPhamController())->postEditSanPham(),
-    // 'xoasanpham' =>(new AdminSanPhamController())->deleteSanPham(),
+    'formsuasanpham' =>(new AdminSanPhamController())->formEditSanPham($_GET['san_pham_id'] ?? null),
+    'suasanpham' =>(new AdminSanPhamController())->postEditSanPham($_POST['san_pham_id'] ?? null),
+    // 'xoasanpham' => (new AdminSanPhamController())->deleteSanPham($_GET['san_pham_id'] ?? null)
 }
 ?>

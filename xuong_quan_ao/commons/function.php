@@ -14,3 +14,40 @@ function connectDB(){
         echo("Connection Failed:".$e->getMessage());
     }
 }
+
+function uploadfile($file, $uploadDir)
+{
+    if ($file['error'] !== UPLOAD_ERR_OK) return false;
+
+    $fileName = basename($file['name']);
+    $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+    $allowed = ['jpg', 'jpeg', 'png', 'gif'];
+
+    if (!in_array($ext, $allowed)) return false;
+
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+    }
+
+    $newFileName = uniqid() . '.' . $ext;
+    $dest = rtrim($uploadDir, '/') . '/' . $newFileName;
+
+    if (move_uploaded_file($file['tmp_name'], $dest)) {
+        return $newFileName;
+    }
+    return false;
+}
+
+function deletefile($fileName)
+{
+    $filePath = __DIR__ . '/../uploads/' . $fileName;
+    if (file_exists($filePath)) unlink($filePath);
+}
+
+function deleteSessionError(){
+    if(isset($_SESSION['flash'])){
+        unset($_SESSION['flash']);
+        session_unset();
+        session_destroy();
+    }
+}
