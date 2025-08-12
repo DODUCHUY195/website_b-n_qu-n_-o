@@ -17,9 +17,17 @@
                 <div class="col-12">
 
                     <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Thêm sản phẩm</h3>
+                        <a href="<?= BASE_URL_ADMIN . '?act=sanpham' ?>" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        <div class="card-header d-flex align-items-center">
+                            <h3 class="card-title mb-0">Thêm sản phẩm</h3>
+                            
+                            
+                           
                         </div>
+
+
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form action="<?= BASE_URL_ADMIN ?>?act=themsanpham " method="POST" enctype="multipart/form-data">

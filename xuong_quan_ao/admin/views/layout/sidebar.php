@@ -49,7 +49,7 @@
 
           <li class="nav-item">
             <a href="<?= BASE_URL_ADMIN . '?act=sanpham' ?>" class="nav-link">
-              <i class="nav-icon fa-thin fa-shirt-jersey"></i>
+             <i class="fas fa-tshirt"></i>
               <p>
                 Sản Phẩm
 

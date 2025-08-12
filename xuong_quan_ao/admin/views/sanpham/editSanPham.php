@@ -13,10 +13,13 @@
             <input type="hidden" name="san_pham_id" value="<?= htmlspecialchars($sanPham['id']) ?>">
             <input type="hidden" name="old_file" value="<?= htmlspecialchars($sanPham['hinh_anh']) ?>">
 
-            <div class="row">
+            <div class="">
                 <!-- Thông tin sản phẩm -->
-                <div class="col-md-6">
+                <div class="">
                     <div class="card card-primary">
+                        <a href="<?= BASE_URL_ADMIN . '?act=sanpham' ?>" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
                         <div class="card-header">
                             <h3 class="card-title">Thông tin sản phẩm</h3>
                         </div>
@@ -94,50 +97,58 @@
 
 
 
-                            <!-- Ảnh đại diện -->
+                          
 
 
 
-                            <div>
-                                <label>Ảnh đại diện hiện tại</label><br>
-                                <?php if (!empty($sanPham['hinh_anh'])): ?>
-                                    <img src="uploads/<?= $sanPham['hinh_anh'] ?>" width="150">
-                                    <p><a href="uploads/<?= $sanPham['hinh_anh'] ?>" target="_blank">Xem ảnh</a></p>
-                                <?php else: ?>
-                                    <p>Chưa có ảnh</p>
-                                <?php endif; ?>
-                            </div>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 350px;">
+                                <!-- Ảnh đại diện -->
+                                <div>
+                                    <label>Ảnh đại diện</label>
+                                    <?php if (!empty($sanPham['hinh_anh'])): ?>
+                                        <img src="uploads/<?= $sanPham['hinh_anh'] ?>" width="100"><br>
+                                        <a href="<?= BASE_URL_ADMIN ?>?act=xoaAnhDaiDien&id=<?= $sanPham['id'] ?>"
+                                            onclick="return confirm('Xóa ảnh đại diện này?')">Xóa ảnh đại diện</a>
+                                    <?php else: ?>
+                                        <span>Chưa có ảnh đại diện</span>
+                                    <?php endif; ?>
 
-                            <div>
-                                <label>Chọn ảnh mới (nếu muốn thay)</label>
-                                <input type="file" name="hinh_anh">
-                            </div>
+                                    <label>Chọn ảnh mới (nếu muốn thay)</label>
+                                    <input type="file" name="hinh_anh">
+                                </div>
 
-                            <div>
-                                <label>Album ảnh</label><br>
-                                <?php if (!empty($listAnhSanPham)): ?>
-                                    <?php foreach ($listAnhSanPham as $anh): ?>
-                                        <div style="display:inline-block; text-align:center; margin:5px;">
-                                            <img src="uploads/<?= $anh['link_hinh_anh'] ?>" width="100"><br>
-                                            <a href="<?= BASE_URL_ADMIN ?>?act=deleteAnhSanPham&id=<?= $anh['id'] ?>&id_san_pham=<?= $sanPham['id'] ?>"
-                                                onclick="return confirm('Xóa ảnh này?')">Xóa</a>
+                                <!-- Album ảnh -->
+                                <div>
+                                    <label>Album ảnh</label><br>
+                                    <?php if (!empty($listAnhSanPham)): ?>
+                                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                                            <?php foreach ($listAnhSanPham as $anh): ?>
+                                                <div style="text-align:center;">
+                                                    <img src="uploads/<?= $anh['link_hinh_anh'] ?>" width="100"><br>
+                                                    <a href="<?= BASE_URL_ADMIN ?>?act=deleteAlbumAnhSanPham&id=<?= $anh['id'] ?>&id_san_pham=<?= $sanPham['id'] ?>"
+                                                        onclick="return confirm('Xóa ảnh này?')">Xóa</a>
+                                                </div>
+                                            <?php endforeach; ?>
                                         </div>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <p>Chưa có ảnh album</p>
-                                <?php endif; ?>
+                                    <?php else: ?>
+                                        <p>Chưa có ảnh album</p>
+                                    <?php endif; ?>
+
+                                    <label>Thêm ảnh album mới</label>
+                                    <input type="file" name="album_anh[]" multiple>
+                                </div>
                             </div>
 
-                            <div>
-                                <label>Thêm ảnh album mới</label>
-                                <input type="file" name="album_anh[]" multiple>
-                            </div>
+
+
 
                         </div>
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Cập nhật sản phẩm</button>
+            <div style="text-align:center; margin-top:20px;">
+                <button type="submit" class="btn btn-primary px-4">Cập nhật sản phẩm</button>
+            </div>
         </form>
 </div>
 
