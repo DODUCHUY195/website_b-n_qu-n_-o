@@ -4,11 +4,18 @@ require_once '../commons/env.php';
 require_once '../commons/function.php';
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminSanPham.php';
+require_once './models/AdminTaiKhoan.php';
 require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminSanPhamController.php';
+require_once './controllers/AdminBaoCaoThongKeController.php';
+require_once './controllers/AdminTaiKhoanController.php';
+
+
 $act = $_GET['act'] ?? '/';
 
 match ($act) {
+    //route bao cao thong ke
+    '/' => (new AdminBaoCaoThongKeController())->home(),
     //route danh mục
     'danhmuc' => (new AdminDanhMucController())->danhSachDanhMuc(),
     'formthemdanhmuc' => (new AdminDanhMucController())->formAddDanhMuc(),
@@ -27,4 +34,21 @@ match ($act) {
     'deleteAlbumAnhSanPham' => (new AdminSanPhamController())->deleteAlbumAnhSanPham(),
     'xoaAnhDaiDien' => (new AdminSanPhamController())->deleteAnhDaiDien(),
     'chiTietSanPham' => (new AdminSanPhamController())->chiTietSanPham(),
+
+    //route quan ly tai khoan quản trị
+    'listtaikhoanquantri' => (new AdminTaiKhoanController())->danhSachQuanTri(),
+    'formthemquantri' => (new AdminTaiKhoanController())->formAddQuanTri(),
+    'themquantri' => (new AdminTaiKhoanController())->postAddQuanTri(),
+    'formsuaquantri' => (new AdminTaiKhoanController())->formEditQuanTri(),
+    'suaquantri' => (new AdminTaiKhoanController())->postEditQuanTri(),
+
+
+    'resetpassword' => (new AdminTaiKhoanController())->resetPassword(),
+
+
+    //route quan ly khách hàng
+    'listtaikhoankhachhang' => (new AdminTaiKhoanController())->danhSachKhachHang(),
+    'formsuakhachhang' => (new AdminTaiKhoanController())->formEditKhachHang(),
+    'suakhachhang' => (new AdminTaiKhoanController())->postEditKhachHang(),
+    // 'chitietkhachhang' => (new AdminTaiKhoanController())->detailKhachHang(),
 };
