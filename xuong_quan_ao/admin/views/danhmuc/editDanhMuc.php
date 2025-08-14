@@ -17,6 +17,9 @@
         <div class="col-12">
 
           <div class="card card-primary">
+             <a href="<?= BASE_URL_ADMIN . '?act=danhmuc' ?>" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
             <div class="card-header">
               <h3 class="card-title">Sửa danh mục</h3>
             </div>

@@ -12,13 +12,16 @@
 
   <!-- Main content -->
   <section class="content">
-    <div class="container-fluid">
-      <div class="row">
+    <div class="container-fluid">   
+      <div class="row">   
         <div class="col-12">
-
           <div class="card card-primary">
+             <a href="<?= BASE_URL_ADMIN . '?act=danhmuc' ?>" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
             <div class="card-header">
               <h3 class="card-title">Thêm danh mục</h3>
+            
             </div>
             <!-- /.card-header -->
             <!-- form start -->
