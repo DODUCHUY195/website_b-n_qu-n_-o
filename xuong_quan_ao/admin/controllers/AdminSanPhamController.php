@@ -71,7 +71,7 @@ class AdminSanPhamController
             }
 
             // Nếu không lỗi → xử lý upload + insert
-            $file_thumb = uploadfile($hinh_anh, './uploads');
+            $file_thumb = uploadfile($hinh_anh, './uploads/');
 
             $san_pham_id = $this->modelSanPham->insertSanPham(
                 $ten_san_pham,
@@ -95,7 +95,7 @@ class AdminSanPhamController
                         'error'    => $img_array['error'][$key],
                         'size'     => $img_array['size'][$key]
                     ];
-                    $link_hinh_anh = uploadfile($file, './uploads');
+                    $link_hinh_anh = uploadfile($file, './uploads/album');
                     $this->modelSanPham->insertAlbumAnhSanPham($san_pham_id, $link_hinh_anh);
                 }
             }
@@ -155,7 +155,7 @@ class AdminSanPhamController
 
         // Xử lý ảnh đại diện
         if ($hinh_anh && $hinh_anh['error'] === 0) {
-            $file_thumb = uploadfile($hinh_anh, './uploads');
+            $file_thumb = uploadfile($hinh_anh, './uploads/');
         } else {
             $file_thumb = $_POST['old_file'] ?? '';
         }
@@ -184,7 +184,7 @@ class AdminSanPhamController
                     'error'    => $img_array['error'][$key],
                     'size'     => $img_array['size'][$key]
                 ];
-                $link_hinh_anh = uploadfile($file, './uploads');
+                $link_hinh_anh = uploadfile($file, './uploads/album');
                 $this->modelSanPham->insertAlbumAnhSanPham($san_pham_id, $link_hinh_anh);
             }
         }

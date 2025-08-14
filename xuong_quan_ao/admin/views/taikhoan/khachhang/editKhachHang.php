@@ -15,17 +15,17 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <h1>Quan ly tai khoan quan khach hang</h1>
+                    <h1>Quản Lý Tài Khoản Khách Hàng</h1>
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Sua thong tin tai khoan khach hang <?= $khachHang['ho_ten']?></h3>
+                            <h3 class="card-title">Sửa thông tin tài khoản khách hàng <?= $khachHang['ho_ten']?></h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form action="<?= BASE_URL_ADMIN . '?act=suakhachhang' ?>" method="POST">
                             <input type="hidden" name="khach_hang_id" value="<?= $khachHang['id']?>">
                         <div class="form-group col-12">
-                                <label>Ho ten</label>
+                                <label>Họ Tên</label>
                                 <input type="text" class="form-control" placeholder="Enter" name="ho_ten" value="<?= $khachHang['ho_ten']?> ">
 
                                 <?php if (isset($_SESSION['error']['ho_ten'])) { ?>
@@ -78,7 +78,7 @@
                                 </div>
 
                                  <div class="form-group">
-                                    <label for="inputStatus">Trang thai tai khoan</label>
+                                    <label for="inputStatus">Trạng Thái Tài Khoản</label>
                                     <select  id="inputStatus" name="trang_thai" class="form-control custom-select">
                                         <option <?= $khachHang['trang_thai'] ==1 ? 'selected':''?> value="1">Active</option>
                                         <option <?= $khachHang['trang_thai'] !==1 ? 'selected':''?> value="2">Inactive</option>

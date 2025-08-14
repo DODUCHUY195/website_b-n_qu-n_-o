@@ -12,7 +12,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1> Quản Lý Tai Khoan Khách Hàng</q></h1>
+                    <h1> Quản Lý Tài Khoản Khách Hàng</q></h1>
                 </div>
 
             </div>
@@ -34,11 +34,11 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Ho Ten</th>
+                                        <th>Họ Tên</th>
                                         <th>Ảnh đại diện</th>
                                         <th>Email</th>
                                         <th>SDT</th>
-                                        <th>Trang Thai</th>
+                                        <th>Trạng Thái</th>
                                         <th>Thao tác</th>
 
                                     </tr>
@@ -59,7 +59,7 @@
                                             <td><?= $khachHang['trang_thai'] == 1 ? 'Active' : 'Inactive' ?></td>
                                             <td>
                                                 <div class="btn-group">
-                                                     <a href="<?= BASE_URL_ADMIN . '?act=chitietkhachhang&id_quan_tri=' . $khachHang['id'] ?>">
+                                                     <a href="<?= BASE_URL_ADMIN . '?act=chitietkhachhang&id_khach_hang=' . $khachHang['id'] ?>">
 
                                                         <button class="btn btn-warning">Chi tiết</button>
                                                     </a>
@@ -80,11 +80,11 @@
                                 <tfoot>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Ho Ten</th>
+                                        <th>Họ Tên</th>
                                         <th>Ảnh đại diện</th>
                                         <th>Email</th>
                                         <th>SDT</th>
-                                        <th>Trang Thai</th>
+                                        <th>Trạng Thái</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </tfoot>

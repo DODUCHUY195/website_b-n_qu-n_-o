@@ -124,7 +124,7 @@
                                         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
                                             <?php foreach ($listAnhSanPham as $anh): ?>
                                                 <div style="text-align:center;">
-                                                    <img src="uploads/<?= $anh['link_hinh_anh'] ?>" width="100"><br>
+                                                    <img src="uploads/album/<?= $anh['link_hinh_anh'] ?>" width="100"><br>
                                                     <a href="<?= BASE_URL_ADMIN ?>?act=deleteAlbumAnhSanPham&id=<?= $anh['id'] ?>&id_san_pham=<?= $sanPham['id'] ?>"
                                                         onclick="return confirm('Xóa ảnh này?')">Xóa</a>
                                                 </div>

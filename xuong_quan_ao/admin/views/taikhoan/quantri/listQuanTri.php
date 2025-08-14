@@ -12,7 +12,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1> Quản Lý Tai Khoan Quan Tri Vien</q></h1>
+          <h1> Quản Lý Tài Khoản Quản Trị Viên</q></h1>
         </div>
 
       </div>
@@ -29,7 +29,7 @@
             <div class="card-header">
               <a href="<?= BASE_URL_ADMIN . '?act=formthemquantri' ?>">
 
-                <button class="btn btn-success">Thêm tai khoan</button>
+                <button class="btn btn-success">Thêm tài khoản</button>
               </a>
             </div>
             <!-- /.card-header -->
@@ -38,10 +38,10 @@
                 <thead>
                   <tr>
                     <th>STT</th>
-                    <th>Ho Ten</th>
+                    <th>Họ Tên</th>
                     <th>Email</th>
                     <th>SDT</th>
-                    <th>Trang Thai</th>
+                    <th>Trạng Thái</th>
                     <th>Thao tác</th>
 
                   </tr>
@@ -58,7 +58,7 @@
                       <td>
                         <a href="<?= BASE_URL_ADMIN . '?act=formsuaquantri&id_quan_tri=' . $quanTri['id'] ?>">
 
-                          <button class="btn btn-warning">Sửa Tai Khoan</button>
+                          <button class="btn btn-warning">Sửa Tài Khoản</button>
                         </a>
                         <a href="<?= BASE_URL_ADMIN . '?act=resetpassword&id_quan_tri=' . $quanTri['id'] ?>" onclick="return confirm('Bạn có đồng muốn reset password không')"><button class="btn btn-danger">Reset</button></a>
 

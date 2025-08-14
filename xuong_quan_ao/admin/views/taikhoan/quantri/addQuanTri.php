@@ -15,16 +15,16 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <h1>Quan ly tai khoan quan tri vien</h1>
+                    <h1>Quản Lý Tài Khoản Quản Trị Viên</h1>
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Them tai khoan quan tri vien</h3>
+                            <h3 class="card-title">Thêm Tài Khoản Quản Trị Viên</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form action="<?= BASE_URL_ADMIN . '?act=themquantri' ?>" method="POST">
                             <div class="form-group col-12">
-                                <label>Ho ten</label>
+                                <label>Họ Tên</label>
                                 <input type="text" class="form-control" placeholder="Enter" name="ho_ten">
 
                                 <?php if (isset($_SESSION['error']['ho_ten'])) { ?>

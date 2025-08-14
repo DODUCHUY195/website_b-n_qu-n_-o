@@ -50,5 +50,5 @@ match ($act) {
     'listtaikhoankhachhang' => (new AdminTaiKhoanController())->danhSachKhachHang(),
     'formsuakhachhang' => (new AdminTaiKhoanController())->formEditKhachHang(),
     'suakhachhang' => (new AdminTaiKhoanController())->postEditKhachHang(),
-    // 'chitietkhachhang' => (new AdminTaiKhoanController())->detailKhachHang(),
+    'chitietkhachhang' => (new AdminTaiKhoanController())->detailKhachHang(),
 };

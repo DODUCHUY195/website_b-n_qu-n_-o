@@ -71,7 +71,7 @@
               <li class="nav-item">
                 <a href="<?= BASE_URL_ADMIN . '?act=listtaikhoanquantri' ?>" class="nav-link">
                   <i class="nav-icon far fas fa-user"></i>
-                  <p>Tai khoan quan tri</p>
+                  <p>Tài Khoản Quản Trị</p>
                 </a>
               </li>
             </ul>
@@ -79,7 +79,7 @@
               <li class="nav-item">
                 <a href="<?= BASE_URL_ADMIN . '?act=listtaikhoankhachhang' ?>" class="nav-link">
                   <i class="nav-icon far fas fa-user"></i>
-                  <p>Tai khoan khach hang</p>
+                  <p>Tài Khoản Khách Hàng</p>
                 </a>
               </li>
             </ul>
@@ -87,7 +87,7 @@
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="nav-icon far fas fa-user"></i>
-                  <p>Tai khoan ca nhan</p>
+                  <p>Tài Khoản Cá Nhân</p>
                 </a>
               </li>
             </ul>

@@ -12,7 +12,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1> bao cao thong ke</q></h1>
+          <h1> Báo cáo thống kê</q></h1>
         </div>
 
       </div>

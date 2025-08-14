@@ -125,7 +125,7 @@
                                 </div>
 
                                 <div class="form-group col-6">
-                                    <label>Trangk thái</label>
+                                    <label>Trạng thái</label>
                                     <select class="form-control" name="trang_thai" id="exampleFormControlSelect1">
 
                                         <option selected disabled>Chọn danh mục sản phẩm</option>
