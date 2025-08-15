@@ -67,7 +67,7 @@
 
                                                         <button class="btn btn-warning">Sửa</button>
                                                     </a>
-                                                    <a href="<?= BASE_URL_ADMIN . '?act=resetpassword&id_quan_tri=' . $khachHang['id'] ?>" onclick="return confirm('Bạn có đồng muốn reset password không')"><button class="btn btn-danger">Reset</button></a>
+                                                    <a href="<?= BASE_URL_ADMIN . '?act=resetpassword&khach_hang_id=' . $khachHang['id'] ?>" onclick="return confirm('Bạn có đồng muốn reset password không')"><button class="btn btn-danger">Reset</button></a>
                                                  
 
                                                 </div>

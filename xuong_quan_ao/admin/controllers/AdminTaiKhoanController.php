@@ -120,10 +120,10 @@ class AdminTaiKhoanController
         $tai_khoan = $this->modelTaiKhoan->getDetailTaiKhoan($tai_khoan_id);
         $password = password_hash('123@123ab', PASSWORD_BCRYPT);
         $status = $this->modelTaiKhoan->resetPassword($tai_khoan_id, $password);
-        if ($status && $tai_khoan['chuc_vu_id' == 1]) {
+        if ($status && $tai_khoan['chuc_vu_id'] == 1) {
             header("Location:" . BASE_URL_ADMIN . '?act=listtaikhoanquantri');
             exit();
-        } else if ($status && $tai_khoan['chuc_vu_id' == 2]) {
+        } else if ($status && $tai_khoan['chuc_vu_id'] == 2) {
             header("Location:" . BASE_URL_ADMIN . '?act=listtaikhoankhachhang');
             exit();
         } else {
@@ -137,23 +137,23 @@ class AdminTaiKhoanController
     }
 
 
- public function formEditKhachHang()
-{
-    $id_khach_hang = $_GET['khach_hang_id'] ?? null;
-    if (!$id_khach_hang) {
-        echo "Thiếu ID khách hàng";
-        return;
+    public function formEditKhachHang()
+    {
+        $id_khach_hang = $_GET['khach_hang_id'] ?? null;
+        if (!$id_khach_hang) {
+            echo "Thiếu ID khách hàng";
+            return;
+        }
+
+        $khachHang = $this->modelTaiKhoan->getDetailTaiKhoan($id_khach_hang);
+
+        if (!$khachHang) {
+            echo "Không tìm thấy khách hàng";
+            return;
+        }
+
+        require_once './views/taikhoan/khachhang/editKhachHang.php';
     }
-
-    $khachHang = $this->modelTaiKhoan->getDetailTaiKhoan($id_khach_hang);
-
-    if (!$khachHang) {
-        echo "Không tìm thấy khách hàng";
-        return;
-    }
-
-    require_once './views/taikhoan/khachhang/editKhachHang.php';
-}
 
 
 
@@ -177,19 +177,19 @@ class AdminTaiKhoanController
             if (empty($email)) {
                 $errors['email'] = 'EMAIL không đc để trống';
             }
-             if (empty($ngay_sinh)) {
+            if (empty($ngay_sinh)) {
                 $errors['ngay_sinh'] = 'EMAIL không đc để trống';
             }
-             if (empty($gioi_tinh)) {
+            if (empty($gioi_tinh)) {
                 $errors['gioi_tinh'] = 'EMAIL không đc để trống';
             }
-            
+
             if (empty($trang_thai)) {
                 $errors['trang_thai'] = 'TT không đc để trống';
             }
 
             if (empty($errors)) {
-                $this->modelTaiKhoan->updateTaiKhoanKhachHang($khach_hang_id, $ho_ten, $email, $so_dien_thoai,$ngay_sinh,$gioi_tinh,$dia_chi, $trang_thai);
+                $this->modelTaiKhoan->updateTaiKhoanKhachHang($khach_hang_id, $ho_ten, $email, $so_dien_thoai, $ngay_sinh, $gioi_tinh, $dia_chi, $trang_thai);
                 header("Location: " . BASE_URL_ADMIN . '?act=listtaikhoankhachhang');
                 exit();
             } else {
@@ -201,12 +201,12 @@ class AdminTaiKhoanController
         }
     }
 
-    public function detailKhachHang(){
-        $id_khach_hang = $_GET['id_khach_hang'];
-        $khachHang = $this->modelTaiKhoan->getDetailTaiKhoan($id_khach_hang);
-        $listDonHang = $this->modelDonHang->getDonHangFromKhachHang($id_khach_hang);
+    // public function detailKhachHang(){
+    //     $id_khach_hang = $_GET['id_khach_hang'];
+    //     $khachHang = $this->modelTaiKhoan->getDetailTaiKhoan($id_khach_hang);
+    //     $listDonHang = $this->modelDonHang->getDonHangFromKhachHang($id_khach_hang);
 
-       
-        require_once './views/taikhoan/khachhang/detailKhachHang.php';
-    }
+
+    //     require_once './views/taikhoan/khachhang/detailKhachHang.php';
+    // }
 }

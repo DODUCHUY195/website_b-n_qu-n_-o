@@ -46,6 +46,16 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="<?= BASE_URL_ADMIN . '?act=donhang' ?>" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Đơn Hàng
+
+              </p>
+            </a>
+          </li>
+
 
           <li class="nav-item">
             <a href="<?= BASE_URL_ADMIN . '?act=sanpham' ?>" class="nav-link">

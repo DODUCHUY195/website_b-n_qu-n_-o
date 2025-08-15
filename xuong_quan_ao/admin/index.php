@@ -5,8 +5,10 @@ require_once '../commons/function.php';
 require_once './models/AdminDanhMuc.php';
 require_once './models/AdminSanPham.php';
 require_once './models/AdminTaiKhoan.php';
+require_once './models/AdminDonHang.php';
 require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminSanPhamController.php';
+require_once './controllers/AdminDonHangController.php';
 require_once './controllers/AdminBaoCaoThongKeController.php';
 require_once './controllers/AdminTaiKhoanController.php';
 
@@ -43,6 +45,11 @@ match ($act) {
     'suaquantri' => (new AdminTaiKhoanController())->postEditQuanTri(),
 
 
+    //route quan ly don hang
+    'donhang' => (new AdminDonHangController())->danhSachDonHang(),
+
+
+    //route reset passowrd
     'resetpassword' => (new AdminTaiKhoanController())->resetPassword(),
 
 
@@ -50,5 +57,5 @@ match ($act) {
     'listtaikhoankhachhang' => (new AdminTaiKhoanController())->danhSachKhachHang(),
     'formsuakhachhang' => (new AdminTaiKhoanController())->formEditKhachHang(),
     'suakhachhang' => (new AdminTaiKhoanController())->postEditKhachHang(),
-    'chitietkhachhang' => (new AdminTaiKhoanController())->detailKhachHang(),
+    // 'chitietkhachhang' => (new AdminTaiKhoanController())->detailKhachHang(),
 };
