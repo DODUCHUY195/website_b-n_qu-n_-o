@@ -73,8 +73,9 @@ class AdminTaiKhoan
         }
     }
 
-    public function resetPassword($id,$password){
-         try {
+    public function resetPassword($id, $password)
+    {
+        try {
             $sql = 'UPDATE  tai_khoans SET mat_khau = :mat_khau WHERE id = :id';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
@@ -88,7 +89,7 @@ class AdminTaiKhoan
     }
 
 
-    public function updateTaiKhoanKhachHang($id, $ho_ten, $email, $so_dien_thoai,$ngay_sinh,$gioi_tinh,$dia_chi, $trang_thai)
+    public function updateTaiKhoanKhachHang($id, $ho_ten, $email, $so_dien_thoai, $ngay_sinh, $gioi_tinh, $dia_chi, $trang_thai)
     {
         try {
             $sql = 'UPDATE  tai_khoans SET ho_ten = :ho_ten,email = :email,so_dien_thoai = :so_dien_thoai,ngay_sinh = :ngay_sinh, gioi_tinh = :gioi_tinh, dia_chi=:dia_chi, trang_thai  = :trang_thai WHERE id = :id';
@@ -107,6 +108,51 @@ class AdminTaiKhoan
         } catch (Exception $e) {
             echo 'loi' . $e->getMessage();
         }
-}
+    }
 
+    public function checkLogin($email, $mat_khau)
+    {
+        try {
+            $sql = "SELECT * FROM tai_khoans
+        WHERE email = :email";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(['email' => $email]);
+            $user = $stmt->fetch();
+            
+            
+            if (is_array($user) && password_verify($mat_khau, $user['mat_khau'])) {
+                if ($user['chuc_vu_id'] == 1) {
+                    if ($user['trang_thai'] == 1) {
+                        return $user;
+                    } else {
+                        return 'Tài khoản bị cấm';
+                    }
+                } else {
+                    return  "Tài khoản không có quyền đăng nhập";
+                }
+            } else {
+                return "Nhập sai thông tin tài khoản mật khẩu";
+            }
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+
+    public function getTaiKhoanFromEmail($email)
+    {
+        try {
+            $sql = 'SELECT * FROM tai_khoans WHERE email= :email';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':email' => $email
+            ]);
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo 'loi' . $e->getMessage();
+        }
+    }
+
+    public function postEditMatKhauCaNhan(){
+
+    }
 }

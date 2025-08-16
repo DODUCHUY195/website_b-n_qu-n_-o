@@ -19,6 +19,13 @@
       <a class="nav-link" data-widget="fullscreen" href="#" role="button">
         <i class="fas fa-expand-arrows-alt"></i>
       </a>
+      
+    </li>
+
+    <li class="nav-item">
+      <a href="<?= BASE_URL_ADMIN . '?act=logout'?>" class="nav-link" onclick="return confirm('Bạn có muốn đăng xuất tài khoản không?')">
+        <i class="fas fa-sign-out-alt"></i>
+      </a>
     </li>
 
   </ul>

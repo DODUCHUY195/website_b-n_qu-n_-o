@@ -57,10 +57,10 @@
                       <td><span class=""><?= $donHang['ten_trang_thai'] ?></span></td>
                       <td>
 
-                        <a class="btn btn-danger" href="<?= BASE_URL_ADMIN . '?act=chiTietdonhang&don_hang_id=' . $donHang['id'] ?>">
+                        <a class="btn btn-primary" href="<?= BASE_URL_ADMIN . '?act=chiTietdonhang&don_hang_id=' . $donHang['id'] ?>">
                           <i class="fas fa-eye"></i>
                         </a>
-                        <a class="btn btn-primary" href="<?= BASE_URL_ADMIN . '?act=formsuadonhang&don_hang_id=' . $donHang['id'] ?>">
+                        <a class="btn btn-warning" href="<?= BASE_URL_ADMIN . '?act=formsuadonhang&don_hang_id=' . $donHang['id'] ?>">
                          <i class="fas fa-wrench"></i>
                         </a>
 

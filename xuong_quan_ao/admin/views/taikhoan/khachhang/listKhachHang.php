@@ -59,15 +59,15 @@
                                             <td><?= $khachHang['trang_thai'] == 1 ? 'Active' : 'Inactive' ?></td>
                                             <td>
                                                 <div class="btn-group">
-                                                     <a href="<?= BASE_URL_ADMIN . '?act=chitietkhachhang&id_khach_hang=' . $khachHang['id'] ?>">
+                                                     <a class="btn btn-primary" href="<?= BASE_URL_ADMIN . '?act=chitietkhachhang&id_khach_hang=' . $khachHang['id'] ?>">
 
-                                                        <button class="btn btn-warning">Chi tiết</button>
+                                                        <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="<?= BASE_URL_ADMIN . '?act=formsuakhachhang&khach_hang_id=' . $khachHang['id'] ?>">
+                                                    <a class="btn btn-warning" href="<?= BASE_URL_ADMIN . '?act=formsuakhachhang&khach_hang_id=' . $khachHang['id'] ?>">
 
-                                                        <button class="btn btn-warning">Sửa</button>
+                                                        <i class="fas fa-wrench"></i>
                                                     </a>
-                                                    <a href="<?= BASE_URL_ADMIN . '?act=resetpassword&khach_hang_id=' . $khachHang['id'] ?>" onclick="return confirm('Bạn có đồng muốn reset password không')"><button class="btn btn-danger">Reset</button></a>
+                                                    <a class="btn btn-danger" href="<?= BASE_URL_ADMIN . '?act=resetpassword&khach_hang_id=' . $khachHang['id'] ?>" onclick="return confirm('Bạn có đồng muốn reset password không')"><i class="fas fa-trash-alt"></i></a>
                                                  
 
                                                 </div>

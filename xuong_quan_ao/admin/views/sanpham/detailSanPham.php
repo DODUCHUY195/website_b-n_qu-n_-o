@@ -66,34 +66,67 @@
 
                 <!-- Tabs mô tả / bình luận -->
                 <div class="row mt-4">
-                    <nav class="w-100">
-                        <div class="nav nav-tabs" id="product-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab"
-                                href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">
-                                Mô tả
-                            </a>
-                            <a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab"
-                                href="#product-comments" role="tab" aria-controls="product-comments"
-                                aria-selected="false">
-                                Bình luận
-                            </a>
-                        </div>
-                    </nav>
-                    <div class="tab-content p-3" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="product-desc" role="tabpanel"
-                            aria-labelledby="product-desc-tab">
-                            <?= nl2br(htmlspecialchars($sanPham['mo_ta'])) ?>
-                        </div>
-                        <div class="tab-pane fade" id="product-comments" role="tabpanel"
-                            aria-labelledby="product-comments-tab">
-                            Chưa có bình luận.
-                        </div>
+                    <div class="col-12">
+                    <h2>Bình luận</h2>
+                    <hr>
+                    <div>
+                        <table id="example2" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Người bình luận</th>
+                                    <th>Nội dung</th>
+                                    <th>Ngày bình luận</th>
+                                    <th>Trạng thái</th>
+
+                                    <th>Thao tác</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php foreach ($listBinhLuan as $key => $binhLuan): ?>
+                                    <tr>
+                                        <td><?= $key + 1 ?></td>
+                                        <td>
+                                            <a href="<?= BASE_URL_ADMIN . '?act=chitietkhachhang&id_khach_hang=' . $binhLuan['tai_khoan_id'] ?>"><?= $binhLuan['ho_ten'] ?>
+                                            </a>
+                                        </td>
+                                        <td><?= $binhLuan['noi_dung'] ?></td>
+                                        <td><?= $binhLuan['ngay_dang'] ?></td>
+                                        <td><?= $binhLuan['trang_thai'] == 1 ? 'Hiển thị' : 'Ẩn' ?></td>
+
+
+                                        <td>
+
+                                            <form action="<?= BASE_URL_ADMIN . '?act=updatetrangthaibinhluan' ?>" method="POST">
+                                                <input type="hidden" name="id_binh_luan" value="<?= $binhLuan['id'] ?>">
+                                                <input type="hidden" name="name_view" value="detail_sanpham">
+                                                <input type="hidden" name="id_khach_hang" value="<?= $binhLuan['tai_khoan_id'] ?>">
+
+                                                <button onclick="return confirm('Bạn có đồng muốn ẩn không')" class="btn btn-warning">
+                                                    <?= $binhLuan['trang_thai'] ==1 ? 'Ẩn' : 'Bỏ Ẩn'?>
+                                                </button>
+                                            </form>
+
+
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+
+                            </tbody>
+
+                        </table>
                     </div>
+                </div>
+                    
                 </div>
             </div>
         </div>
     </section>
 </div>
 
+
 <!-- footer -->
 <?php include './views/layout/footer.php'; ?>
+

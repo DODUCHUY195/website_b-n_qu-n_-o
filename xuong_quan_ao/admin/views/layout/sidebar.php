@@ -95,7 +95,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="<?= BASE_URL_ADMIN . '?act=formsuathongtincanhan' ?>" class="nav-link">
                   <i class="nav-icon far fas fa-user"></i>
                   <p>Tài Khoản Cá Nhân</p>
                 </a>

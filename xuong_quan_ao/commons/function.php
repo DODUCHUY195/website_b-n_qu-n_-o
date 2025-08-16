@@ -51,3 +51,10 @@ function deleteSessionError(){
         session_destroy();
     }
 }
+
+function checkLoginAdmin(){
+    if(!isset($_SESSION['user_admin'])){
+        header("Location: " .BASE_URL_ADMIN . '?act=login_admin');
+        exit();
+    }
+}

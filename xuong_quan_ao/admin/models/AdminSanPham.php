@@ -174,6 +174,51 @@ public function getAlbumAnhBySanPhamId($id)
         return $stmt->execute([$id]);
     }
 
+    public function getBinhLuanFromKhachHang($id){
+         try {
+            $sql = 'SELECT binh_luans.*, san_phams.ten_san_pham
+            FROM binh_luans
+            INNER JOIN san_phams ON binh_luans.san_pham_id = san_phams.id
+            WHERE binh_luans.tai_khoan_id = :id';
 
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id'=>$id]);
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo 'loi' . $e->getMessage();
+        }
+    }
+
+
+
+    public function getDetailBinhLuan($id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM binh_luans WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateTrangThaiBinhLuan($id,$trang_thai){
+         $stmt = $this->conn->prepare(
+            " UPDATE binh_luans 
+         SET trang_thai = :trang_thai
+         WHERE id = :id");
+        return $stmt->execute([':id'=>$id,':trang_thai'=>$trang_thai]);
+    }
     
+
+    public function getBinhLuanFromSanPham($id){
+         try {
+            $sql = 'SELECT binh_luans.*, tai_khoans.ho_ten
+            FROM binh_luans
+            INNER JOIN tai_khoans ON binh_luans.tai_khoan_id = tai_khoans.id
+            WHERE binh_luans.san_pham_id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id'=>$id]);
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo 'loi' . $e->getMessage();
+        }
+    }
 }

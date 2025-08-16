@@ -68,15 +68,15 @@
                       <td><?= $sanPham['trang_thai'] == 1 ? 'Còn Bán' : 'Dừng Bán' ?></td>
                       <td>
                         <div class="btn-group">
-                          <a href="<?= BASE_URL_ADMIN . '?act=chiTietSanPham&id=' . $sanPham['id'] ?>">
+                          <a class="btn btn-primary" href="<?= BASE_URL_ADMIN . '?act=chiTietSanPham&id=' . $sanPham['id'] ?>">
 
 
-                             <button class="btn btn-primary"> <i class="fas fa-eye"></i></button></a>
-                          <a href="<?= BASE_URL_ADMIN . '?act=formsuasanpham&id_san_pham=' . $sanPham['id'] ?>">
+                              <i class="fas fa-eye"></i></a>
+                          <a class="btn btn-warning" href="<?= BASE_URL_ADMIN . '?act=formsuasanpham&id_san_pham=' . $sanPham['id'] ?>">
 
-                            <button class="btn btn-warning"><i class="fas fa-wrench"></i></button>
+                           <i class="fas fa-wrench"></i>
                           </a>
-                          <a href="<?= BASE_URL_ADMIN ?>?act=xoaSanPham&id=<?= $sanPham['id'] ?>" onclick="return confirm('Bạn có đồng ý xoá không')"><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></a>
+                          <a href="<?= BASE_URL_ADMIN ?>?act=xoaSanPham&id=<?= $sanPham['id'] ?>" onclick="return confirm('Bạn có đồng ý xoá không')" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                         </div>
                       </td>
                     </tr>

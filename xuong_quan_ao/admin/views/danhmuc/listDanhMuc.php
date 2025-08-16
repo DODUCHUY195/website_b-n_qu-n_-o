@@ -51,11 +51,10 @@
                       <td><?= $danhMuc['ten_danh_muc'] ?></td>
                       <td><?= $danhMuc['mo_ta'] ?></td>
                       <td>
-                        <a href="<?= BASE_URL_ADMIN . '?act=formsuadanhmuc&id_danh_muc=' . $danhMuc['id'] ?>">
-
-                          <button class="btn btn-warning">Sửa</button>
+                        <a class="btn btn-warning" href="<?= BASE_URL_ADMIN . '?act=formsuadanhmuc&id_danh_muc=' . $danhMuc['id'] ?>">
+                          <i class="fas fa-wrench"></i>
                         </a>
-                        <a href="<?= BASE_URL_ADMIN . '?act=xoadanhmuc&id_danh_muc=' . $danhMuc['id'] ?>" onclick="return confirm('Bạn có đồng ý xoá không')"><button class="btn btn-danger">Xoá</button></a>
+                        <a class="btn btn-danger" href="<?= BASE_URL_ADMIN . '?act=xoadanhmuc&id_danh_muc=' . $danhMuc['id'] ?>" onclick="return confirm('Bạn có đồng ý xoá không')"><i class="fas fa-trash-alt"></i></a>
 
                       </td>
                     </tr>

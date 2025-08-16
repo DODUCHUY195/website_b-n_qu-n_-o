@@ -31,10 +31,9 @@
                   <label>Tên danh mục</label>
                   <input type="text" class="form-control" placeholder="Enter" name="ten_danh_muc">
 
-                  <?php if (isset($errors['ten_danh_muc'])) { ?>
-                    <p class="text-danger"><? $errors['ten_danh_muc'] ?></p>
+                 <?php if (isset($errors['ten_danh_muc'])) { ?>
+                    <p class="text-danger"><?= $errors['ten_danh_muc'] ?></p>
                   <?php } ?>
-
                 </div>
 
                 <div class="form-group">
