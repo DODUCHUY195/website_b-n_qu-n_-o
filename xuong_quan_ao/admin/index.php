@@ -47,6 +47,12 @@ match ($act) {
 
     //route quan ly don hang
     'donhang' => (new AdminDonHangController())->danhSachDonHang(),
+    'chiTietdonhang' => (new AdminDonHangController())->detailDonHang(),
+    'formsuadonhang' => (new AdminDonHangController())->formEditDonHang($_GET['don_hang_id'] ?? null),
+    'suadonhang' => (new AdminDonHangController())->postEditDonHang(),
+
+
+
 
 
     //route reset passowrd

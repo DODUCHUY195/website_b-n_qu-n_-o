@@ -45,6 +45,7 @@
                   </tr>
                 </thead>
                 <tbody>
+                 
                   <?php foreach ($listDonHang as $key => $donHang): ?>
                     <tr>
                       <td><?= $key + 1 ?></td>
@@ -53,19 +54,16 @@
                       <td><?= $donHang['sdt_nguoi_nhan'] ?></td>
                       <td><?= $donHang['ngay_dat'] ?></td>
                       <td><?= $donHang['tong_tien'] ?></td>
-                      <td><?= $donHang['ten_trang_thai'] ?></td>
-                      <td><span class="badge rounded-pill text-bg-<?= $donHang['ten_trang_thai'] ?>"><?= $donHang['ten_trang_thai'] ?></span></td>
+                      <td><span class=""><?= $donHang['ten_trang_thai'] ?></span></td>
                       <td>
-                        <div class="btn-group">
-                          <a href="<?= BASE_URL_ADMIN . '?act=chiTietdonhang&id_don_hang =' . $sanPham['id'] ?>">
 
+                        <a class="btn btn-danger" href="<?= BASE_URL_ADMIN . '?act=chiTietdonhang&don_hang_id=' . $donHang['id'] ?>">
+                          <i class="fas fa-eye"></i>
+                        </a>
+                        <a class="btn btn-primary" href="<?= BASE_URL_ADMIN . '?act=formsuadonhang&don_hang_id=' . $donHang['id'] ?>">
+                         <i class="fas fa-wrench"></i>
+                        </a>
 
-                             <button class="btn btn-primary"> <i class="fas fa-eye"></i></button></a>
-                          <a href="<?= BASE_URL_ADMIN . '?act=formsuadonhang&id_don_hang =' . $sanPham['id'] ?>">
-
-                            <button class="btn btn-warning"><i class="fas fa-wrench"></i></button>
-                          </a>
-                        </div>
                       </td>
                     </tr>
                   <?php endforeach ?>
@@ -81,6 +79,7 @@
                     <th>Tổng tiền</th>
                     <th>Trạng thái</th>
                     <th>Thao tác</th>
+
                   </tr>
                 </tfoot>
               </table>
@@ -107,7 +106,10 @@
       "responsive": true,
       "lengthChange": false,
       "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+      "columnDefs": [
+        { "orderable": false, "targets": -1 } // Cột cuối (Thao tác) không sort
+      ]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
