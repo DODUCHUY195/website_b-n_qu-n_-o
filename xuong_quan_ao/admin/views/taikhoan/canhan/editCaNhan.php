@@ -5,6 +5,7 @@
 
 <!-- sidebar -->
 <?php include './views/layout/sidebar.php' ?>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -21,10 +22,10 @@
                 <div class="col-md-3">
                     <div class="text-center">
                         <img src="<?= BASE_URL_ADMIN  . $thongTin['anh_dai_dien'] ?>"
-                          style="width:100px"
-                        
-                          onerror="this.onerror=null;this.src='https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTedhGeyys0UcmRROl2mGCG-tPe1EHtfffCcgGK5y06mtQLcy-sxtqhHgeJ8ZPBiKGt2ZdAtUao1HT4pDkwj-1n8924u2pMDvTNjrldwkrO'">
-                        <h6>Họ Tên: <?= $thongTin['ho_ten']?></h6>
+                            style="width:100px"
+
+                            onerror="this.onerror=null;this.src='https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTedhGeyys0UcmRROl2mGCG-tPe1EHtfffCcgGK5y06mtQLcy-sxtqhHgeJ8ZPBiKGt2ZdAtUao1HT4pDkwj-1n8924u2pMDvTNjrldwkrO'">
+                        <h6>Họ Tên: ?</h6>
 
 
                     </div>
@@ -32,7 +33,7 @@
 
                 <!-- edit form column -->
                 <div class="col-md-9 personal-info">
-                    <form action="<?= BASE_URL_ADMIN . '?act=suamatkhaucanhan' ?>" method="POST">
+                    <form action="<?= BASE_URL_ADMIN . '?act=suathongtincanhan' ?>" method="POST">
                         <h3>Thông tin cá nhân</h3>
 
 
@@ -41,6 +42,7 @@
                             <div class="col-lg-12">
                                 <input class="form-control" type="text" value="Jane">
                             </div>
+
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Last name:</label>
@@ -60,23 +62,7 @@
                                 <input class="form-control" type="text" value="janesemail@gmail.com">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Time Zone:</label>
-                            <div class="col-lg-12">
-                                <div class="ui-select">
-                                    <select id="user_time_zone" class="form-control">
-                                        <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                        <option value="Alaska">(GMT-09:00) Alaska</option>
-                                        <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                        <option value="Arizona">(GMT-07:00) Arizona</option>
-                                        <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                                        <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                                        <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                                        <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <label class="col-md-3 control-label"></label>
                             <div class="col-md-12">
@@ -90,35 +76,33 @@
                 </div>
                 <div class="col-md-9 personal-info">
                     <form action="<?= BASE_URL_ADMIN . '?act=suamatkhaucanhan' ?>" method="POST">
-                    <h3>Đổi mật khẩu: </h3>
-                    
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Mật khẩu cũ:</label>
-                            <div class="col-md-12">
-                                <input class="form-control" type="text" value="janeuser">
-                            </div>
+                            <label for="old_pass">Mật khẩu cũ</label>
+                            <input type="password" name="old_pass" class="form-control">
+                            <?php if (isset($_SESSION['error']['old_pass'])): ?>
+                                <small class="text-danger"><?= $_SESSION['error']['old_pass'] ?></small>
+                            <?php endif; ?>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Mật khẩu mới:</label>
-                            <div class="col-md-12">
-                                <input class="form-control" type="password" value="11111122333">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"> Nhập lại mật khẩu: </label>
-                            <div class="col-md-12">
-                                <input class="form-control" type="password" value="11111122333">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"></label>
-                            <div class="col-md-12">
-                                <input type="submit" class="btn btn-primary" value="Save Changes">
 
-
-                            </div>
+                        <div class="form-group">
+                            <label for="new_pass">Mật khẩu mới</label>
+                            <input type="password" name="new_pass" class="form-control">
+                            <?php if (isset($_SESSION['error']['new_pass'])): ?>
+                                <small class="text-danger"><?= $_SESSION['error']['new_pass'] ?></small>
+                            <?php endif; ?>
                         </div>
+
+                        <div class="form-group">
+                            <label for="confirm_pass">Nhập lại mật khẩu mới</label>
+                            <input type="password" name="confirm_pass" class="form-control">
+                            <?php if (isset($_SESSION['error']['confirm_pass'])): ?>
+                                <small class="text-danger"><?= $_SESSION['error']['confirm_pass'] ?></small>
+                            <?php endif; ?>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
                     </form>
+
 
                 </div>
             </div>
@@ -130,6 +114,8 @@
 </div>
 <!-- /.content-wrapper -->
 <!-- footer -->
+
+
 <?php include './views/layout/footer.php'; ?>
 
 </body>

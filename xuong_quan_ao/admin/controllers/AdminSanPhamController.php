@@ -146,10 +146,12 @@ class AdminSanPhamController
             if (empty($danh_muc_id)) $errors['danh_muc_id'] = 'Vui lòng chọn danh mục';
             if (empty($trang_thai)) $errors['trang_thai'] = 'Vui lòng chọn trạng thái';
 
+
             if (!empty($errors)) {
+
                 $_SESSION['error'] = $errors;
                 $_SESSION['flash'] = true;
-                header("Location:" . BASE_URL_ADMIN . '?act=formsuasanpham&id=' . $san_pham_id);
+                header("Location:" . BASE_URL_ADMIN . '?act=formsuasanpham&id_san_pham=' . $san_pham_id);
                 exit();
             }
 
@@ -275,7 +277,7 @@ class AdminSanPhamController
 
         $name_view = $_POST['name_view'];
         $binhLuan = $this->modelSanPham->getDetailBinhLuan($id_binh_luan);
-      
+
         if ($binhLuan) {
             $trang_thai_update = '';
             if ($binhLuan['trang_thai'] == 1) {
@@ -288,7 +290,7 @@ class AdminSanPhamController
                 if ($name_view == 'detail_khach') {
                     header("Location: " . BASE_URL_ADMIN . "?act=chitietkhachhang&id_khach_hang=" . $id_khach_hang);
                     exit();
-                } else{
+                } else {
                     header("Location: " . BASE_URL_ADMIN . "?act=chiTietSanPham&id_san_pham=" . $binhLuan['san_pham_id']);
                     exit();
                 }

@@ -30,8 +30,8 @@
                                     <label>Tên người nhận</label>
                                     <input type="text" class="form-control" placeholder="Enter" name="ten_nguoi_nhan" value="<?= $donHang['ten_nguoi_nhan'] ?>">
 
-                                    <?php if (isset($errors['ten_nguoi_nhan'])) { ?>
-                                        <p class="text-danger"><?= $errors['ten_nguoi_nhan'] ?></p>
+                                    <?php if (isset($_SESSION['error']['ten_nguoi_nhan'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['error']['ten_nguoi_nhan'] ?></p>
                                     <?php } ?>
 
                                 </div>
@@ -40,7 +40,7 @@
                                     <label>Số điện thoại</label>
                                     <input type="text" class="form-control" placeholder="Enter" name="sdt_nguoi_nhan" value="<?= $donHang['sdt_nguoi_nhan'] ?>">
 
-                                    <?php if (isset($errors['sdt_nguoi_nhan'])) { ?>
+                                    <?php if (isset($_SESSION['error']['sdt_nguoi_nhan'])) { ?>
                                         <p class="text-danger"><?= $errors['sdt_nguoi_nhan'] ?></p>
                                     <?php } ?>
 
@@ -51,7 +51,7 @@
                                     <label>Email</label>
                                     <input type="email" class="form-control" placeholder="Enter" name="email_nguoi_nhan" value="<?= $donHang['email_nguoi_nhan'] ?>">
 
-                                    <?php if (isset($errors['email_nguoi_nhan'])) { ?>
+                                    <?php if (isset($_SESSION['error']['email_nguoi_nhan'])) { ?>
                                         <p class="text-danger"><?= $errors['email_nguoi_nhan'] ?></p>
                                     <?php } ?>
 
@@ -62,7 +62,7 @@
                                     <label>Địa chỉ</label>
                                     <input type="text" class="form-control" placeholder="Enter" name="dia_chi_nguoi_nhan" value="<?= $donHang['dia_chi_nguoi_nhan'] ?>">
 
-                                    <?php if (isset($errors['dia_chi_nguoi_nhan'])) { ?>
+                                    <?php if (isset($_SESSION['error']['dia_chi_nguoi_nhan'])) { ?>
                                         <p class="text-danger"><?= $errors['dia_chi_nguoi_nhan'] ?></p>
                                     <?php } ?>
 
@@ -94,6 +94,10 @@
                                             </option>
                                         <?php endforeach; ?>
                                     </select>
+
+                                    <?php if (isset($_SESSION['error']['trang_thai_id'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['error']['trang_thai_id'] ?></p>
+                                    <?php } ?>
                                 </div>
 
                             </div>

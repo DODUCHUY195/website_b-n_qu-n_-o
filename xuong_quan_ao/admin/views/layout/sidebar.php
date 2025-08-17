@@ -14,7 +14,7 @@
           <img src="./assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Tên đăng nhập</a>
+          <a href="#" class="d-block">Đỗ Đức Huy</a>
         </div>
       </div>
 
@@ -59,7 +59,7 @@
 
           <li class="nav-item">
             <a href="<?= BASE_URL_ADMIN . '?act=sanpham' ?>" class="nav-link">
-              <i class="fas fa-tshirt"></i>
+              <i class="nav-icon fas fa-tshirt"></i>
               <p>
                 Sản Phẩm
 

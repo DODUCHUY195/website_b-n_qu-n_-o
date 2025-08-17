@@ -122,15 +122,17 @@ class AdminTaiKhoanController
 
         $tai_khoan = $this->modelTaiKhoan->getDetailTaiKhoan($tai_khoan_id);
         $password = password_hash('123@123ab', PASSWORD_BCRYPT);
-        $status = $this->modelTaiKhoan->resetPassword($tai_khoan_id, $password);
-        if ($status && $tai_khoan['chuc_vu_id'] == 1) {
-            header("Location:" . BASE_URL_ADMIN . '?act=listtaikhoanquantri');
-            exit();
-        } else if ($status && $tai_khoan['chuc_vu_id'] == 2) {
-            header("Location:" . BASE_URL_ADMIN . '?act=listtaikhoankhachhang');
-            exit();
-        } else {
+        $status = $this->modelTaiKhoan->resetPasswordHash($tai_khoan_id, $password);
+        if ($status) {
+            if ($tai_khoan['chuc_vu_id'] == 1) {
+                header("Location:" . BASE_URL_ADMIN . '?act=listtaikhoanquantri');
+                exit();
+            } else if ($status && $tai_khoan['chuc_vu_id'] == 2) {
+                header("Location:" . BASE_URL_ADMIN . '?act=listtaikhoankhachhang');
+                exit();
+            }
         }
+        die('Lỗi khi reset mật khẩu');
     }
 
     public function danhSachKhachHang()
@@ -142,20 +144,14 @@ class AdminTaiKhoanController
 
     public function formEditKhachHang()
     {
-        $id_khach_hang = $_GET['khach_hang_id'] ?? null;
-        if (!$id_khach_hang) {
-            echo "Thiếu ID khách hàng";
-            return;
-        }
-
+        $id_khach_hang = $_GET['khach_hang_id'];
         $khachHang = $this->modelTaiKhoan->getDetailTaiKhoan($id_khach_hang);
-
-        if (!$khachHang) {
-            echo "Không tìm thấy khách hàng";
-            return;
+        if ($khachHang) {
+            require_once './views/taikhoan/khachhang/editKhachHang.php';
+            deleteSessionError();
+        } else {
+            header("Location: " . BASE_URL_ADMIN . '?act=listtaikhoankhachhang');
         }
-
-        require_once './views/taikhoan/khachhang/editKhachHang.php';
     }
 
 
@@ -198,7 +194,7 @@ class AdminTaiKhoanController
             } else {
                 $_SESSION['error'] = $errors;
                 $_SESSION['flash'] = true;
-                header("Location: " . BASE_URL_ADMIN . '?act=formsuakhachhang&id_khach_hang=' . $khach_hang_id);
+                header("Location: " . BASE_URL_ADMIN . '?act=formsuakhachhang&khach_hang_id=' . $khach_hang_id);
                 exit();
             }
         }
@@ -218,6 +214,7 @@ class AdminTaiKhoanController
     {
         require_once './views/auth/formLogin.php';
         deleteSessionError();
+        exit();
     }
 
     public function login()
@@ -229,7 +226,7 @@ class AdminTaiKhoanController
             $user = $this->modelTaiKhoan->checkLogin($email, $password);
             if (is_array($user)) {
 
-                $_SESSION['user_admin'] = $user;
+                $_SESSION['user_admin'] = is_array($user);
 
                 header("Location:" . BASE_URL_ADMIN);
                 exit();
@@ -255,11 +252,84 @@ class AdminTaiKhoanController
     public function formEditCaNhanQuanTri()
     {
         $email = $_SESSION['user_admin'];
+
         $thongTin = $this->modelTaiKhoan->getTaiKhoanFromEmail($email);
+        // var_dump($thongTin);
+        // die;
         require_once './views/taikhoan/canhan/editCaNhan.php';
     }
 
-    public function postEditCaNhanQuanTri(){
-        
+    public function postEditCaNhanQuanTri() {}
+    public function postEditMatKhauCaNhan()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $old_pass     = $_POST['old_pass'] ?? '';
+            $new_pass     = $_POST['new_pass'] ?? '';
+            $confirm_pass = $_POST['confirm_pass'] ?? '';
+
+            $errors = [];
+
+            // Lấy thông tin user từ session
+            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_admin'] ?? '');
+            if ($user === null) {
+                echo "Không tìm thấy tài khoản!";
+            } else {
+                echo "Tên tài khoản: " . $user['ho_ten'];
+            }
+            // if (!$user || !is_array($user)) {
+            //     $_SESSION['error'] = ['account' => 'Không tìm thấy tài khoản'];
+            //     $_SESSION['flash'] = true;
+            //     header("Location: " . BASE_URL_ADMIN . '?act=formsuathongtincanhan');
+            //     exit();
+            // }
+
+            // Kiểm tra mật khẩu cũ
+            if (empty($old_pass)) {
+                $errors['old_pass'] = 'Mật khẩu cũ không được để trống';
+                
+            } else if (!password_verify($old_pass, $user['old_pass'])) {
+                $errors['old_pass'] = 'Mật khẩu cũ không chính xác';
+                
+                
+            }
+
+
+
+
+            // Kiểm tra mật khẩu mới
+            if (empty($new_pass)) {
+                $errors['new_pass'] = 'Mật khẩu mới không được để trống';
+            }
+
+            // Xác nhận mật khẩu
+            if (empty($confirm_pass)) {
+                $errors['confirm_pass'] = 'Vui lòng nhập lại mật khẩu mới';
+            } elseif ($new_pass !== $confirm_pass) {
+                $errors['confirm_pass'] = 'Mật khẩu nhập lại không khớp';
+            }
+
+            // Nếu có lỗi thì lưu vào session và quay lại form
+            if (!empty($errors)) {
+                $_SESSION['error'] = $errors;
+                $_SESSION['flash'] = true;
+                header("Location: " . BASE_URL_ADMIN . '?act=formsuathongtincanhan');
+                exit();
+            }
+
+            // Cập nhật mật khẩu mới
+            $hashPass = password_hash($new_pass, PASSWORD_BCRYPT);
+            
+            $status   = $this->modelTaiKhoan->resetPasswordHash($user['id'], $hashPass);
+            
+            if ($status) {
+                $_SESSION['success'] = 'Đổi mật khẩu thành công';
+            } else {
+                $_SESSION['error'] = ['system' => 'Đổi mật khẩu thất bại'];
+            }
+            
+            $_SESSION['flash'] = true;
+            header("Location: " . BASE_URL_ADMIN . '?act=formsuathongtincanhan');
+            exit();
+        }
     }
 }

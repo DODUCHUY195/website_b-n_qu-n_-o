@@ -47,8 +47,11 @@ function deletefile($fileName)
 function deleteSessionError(){
     if(isset($_SESSION['flash'])){
         unset($_SESSION['flash']);
-        session_unset();
-        session_destroy();
+        unset($_SESSION['error']);
+
+        // session_unset();
+        // session_destroy();
+       
     }
 }
 

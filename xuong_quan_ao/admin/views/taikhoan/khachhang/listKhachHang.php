@@ -67,7 +67,7 @@
 
                                                         <i class="fas fa-wrench"></i>
                                                     </a>
-                                                    <a class="btn btn-danger" href="<?= BASE_URL_ADMIN . '?act=resetpassword&khach_hang_id=' . $khachHang['id'] ?>" onclick="return confirm('Bạn có đồng muốn reset password không')"><i class="fas fa-trash-alt"></i></a>
+                                                    <a class="btn btn-danger" href="<?= BASE_URL_ADMIN . '?act=resetpassword&id_quan_tri=' . $khachHang['id'] ?>" onclick="return confirm('Bạn có đồng muốn reset password không')"><i class="fas fa-trash-alt"></i></a>
                                                  
 
                                                 </div>

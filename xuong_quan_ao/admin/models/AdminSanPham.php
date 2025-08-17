@@ -54,8 +54,18 @@ class AdminSanPham
 
     public function updateSanPham($id, $ten_san_pham, $gia_san_pham, $gia_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh)
     {
-        $stmt = $this->conn->prepare("UPDATE san_phams SET ten_san_pham = ?, gia_san_pham = ?, gia_khuyen_mai = ?, so_luong = ?, ngay_nhap = ?, danh_muc_id = ?, trang_thai = ?, mo_ta = ?, hinh_anh = ? WHERE id = ?");
-        return $stmt->execute([$ten_san_pham, $gia_san_pham, $gia_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh, $id]);
+        $stmt = $this->conn->prepare("UPDATE san_phams SET ten_san_pham = :ten_san_pham, gia_san_pham = :gia_san_pham, gia_khuyen_mai = :gia_khuyen_mai, so_luong = :so_luong, ngay_nhap = :ngay_nhap, danh_muc_id = :danh_muc_id, trang_thai = :trang_thai, mo_ta = :mo_ta, hinh_anh = :hinh_anh WHERE id = :id");
+        return $stmt->execute([':ten_san_pham' => $ten_san_pham,
+                ':gia_san_pham' => $gia_san_pham,
+                ':gia_khuyen_mai' => $gia_khuyen_mai,
+                ':so_luong' => $so_luong,
+                ':ngay_nhap' => $ngay_nhap,
+                ':danh_muc_id' => $danh_muc_id,
+                ':trang_thai' => $trang_thai,
+                ':mo_ta' => $mo_ta,
+                ':hinh_anh' => $hinh_anh,
+                ':id' => $id
+            ]);
     }
 
 
@@ -95,19 +105,19 @@ class AdminSanPham
 
 
 
-public function getSanPhamById($id)
-{
-    $stmt = $this->conn->prepare("SELECT * FROM san_phams WHERE id = ?");
-    $stmt->execute([$id]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
+    public function getSanPhamById($id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM san_phams WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
-public function getAlbumAnhBySanPhamId($id)
-{
-    $stmt = $this->conn->prepare("SELECT * FROM hinh_anh_san_phams WHERE san_pham_id = ?");
-    $stmt->execute([$id]);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+    public function getAlbumAnhBySanPhamId($id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM hinh_anh_san_phams WHERE san_pham_id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 
 
@@ -174,15 +184,16 @@ public function getAlbumAnhBySanPhamId($id)
         return $stmt->execute([$id]);
     }
 
-    public function getBinhLuanFromKhachHang($id){
-         try {
+    public function getBinhLuanFromKhachHang($id)
+    {
+        try {
             $sql = 'SELECT binh_luans.*, san_phams.ten_san_pham
             FROM binh_luans
             INNER JOIN san_phams ON binh_luans.san_pham_id = san_phams.id
             WHERE binh_luans.tai_khoan_id = :id';
 
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([':id'=>$id]);
+            $stmt->execute([':id' => $id]);
             return $stmt->fetchAll();
         } catch (Exception $e) {
             echo 'loi' . $e->getMessage();
@@ -198,24 +209,27 @@ public function getAlbumAnhBySanPhamId($id)
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateTrangThaiBinhLuan($id,$trang_thai){
-         $stmt = $this->conn->prepare(
+    public function updateTrangThaiBinhLuan($id, $trang_thai)
+    {
+        $stmt = $this->conn->prepare(
             " UPDATE binh_luans 
          SET trang_thai = :trang_thai
-         WHERE id = :id");
-        return $stmt->execute([':id'=>$id,':trang_thai'=>$trang_thai]);
+         WHERE id = :id"
+        );
+        return $stmt->execute([':id' => $id, ':trang_thai' => $trang_thai]);
     }
-    
 
-    public function getBinhLuanFromSanPham($id){
-         try {
+
+    public function getBinhLuanFromSanPham($id)
+    {
+        try {
             $sql = 'SELECT binh_luans.*, tai_khoans.ho_ten
             FROM binh_luans
             INNER JOIN tai_khoans ON binh_luans.tai_khoan_id = tai_khoans.id
             WHERE binh_luans.san_pham_id = :id';
 
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([':id'=>$id]);
+            $stmt->execute([':id' => $id]);
             return $stmt->fetchAll();
         } catch (Exception $e) {
             echo 'loi' . $e->getMessage();

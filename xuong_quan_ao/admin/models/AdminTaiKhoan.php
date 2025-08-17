@@ -73,7 +73,7 @@ class AdminTaiKhoan
         }
     }
 
-    public function resetPassword($id, $password)
+    public function resetPasswordHash($id, $password)
     {
         try {
             $sql = 'UPDATE  tai_khoans SET mat_khau = :mat_khau WHERE id = :id';
@@ -116,7 +116,7 @@ class AdminTaiKhoan
             $sql = "SELECT * FROM tai_khoans
         WHERE email = :email";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute(['email' => $email]);
+            $stmt->execute([':email' => $email]);
             $user = $stmt->fetch();
             
             
@@ -143,16 +143,16 @@ class AdminTaiKhoan
         try {
             $sql = 'SELECT * FROM tai_khoans WHERE email= :email';
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([
-                ':email' => $email
-            ]);
-            return $stmt->fetch();
+            $stmt->execute([':email' => $email]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $user ?: null;
+        
+       
         } catch (Exception $e) {
             echo 'loi' . $e->getMessage();
+           return null;
         }
     }
 
-    public function postEditMatKhauCaNhan(){
-
-    }
+    
 }
