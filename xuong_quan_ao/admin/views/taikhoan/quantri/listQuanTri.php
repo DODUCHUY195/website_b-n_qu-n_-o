@@ -60,7 +60,7 @@
 
                           <i class="fas fa-wrench"></i>
                         </a>
-                        <a href="<?= BASE_URL_ADMIN . '?act=resetpassword&id_quan_tri=' . $quanTri['id'] ?>" onclick="return confirm('Bạn có đồng muốn reset password không')" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                        <a href="<?= BASE_URL_ADMIN . '?act=resetpassword&id_quan_tri=' . $quanTri['id'] ?>" onclick="return confirm('Bạn có đồng muốn reset password không')" class="btn btn-danger"><i class="fas fa-redo-alt"></i></a>
 
                       </td>
                     </tr>

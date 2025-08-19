@@ -6,15 +6,24 @@
             $this->modelSanPham = new SanPham();
         }
         public function home(){
-            echo"Day la HOME";
+            $listSanPham = $this->modelSanPham->getAllSanPham();
+            require_once './views/home.php';
         }
-        public function trangchu(){
-            echo"Trang chu";
-        }
-        public function danhsach(){
-            echo "Danh sach sp";
-            $listProduct = $this->modelSanPham->getAllProduct();
-            require_once './views/listProduct.php';
+        
+        public function chiTietSanPham(){
+            $id = $_GET['id_san_pham'];
+
+            $sanPham        = $this->modelSanPham->getDetailSanPham($id);
+        $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
+        $listBinhluan   = $this->modelSanPham->getBinhLuanFromSanPham($id);
+            if ($sanPham) {
+                require_once './views/detailSanPham.php';
+                deleteSessionError();
+            } else {
+                 http_response_code(404);
+            echo 'Không tìm thấy sản phẩm';
+            exit();
+            }
         }
     }
 ?>

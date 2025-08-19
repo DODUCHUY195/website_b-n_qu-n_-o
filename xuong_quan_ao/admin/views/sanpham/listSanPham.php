@@ -67,7 +67,7 @@
                       <td><?= $sanPham['ten_danh_muc'] ?></td>
                       <td><?= $sanPham['trang_thai'] == 1 ? 'Còn Bán' : 'Dừng Bán' ?></td>
                       <td>
-                        <div class="btn-group">
+                        
                           <a class="btn btn-primary" href="<?= BASE_URL_ADMIN . '?act=chiTietSanPham&id=' . $sanPham['id'] ?>">
 
 
@@ -77,7 +77,7 @@
                            <i class="fas fa-wrench"></i>
                           </a>
                           <a href="<?= BASE_URL_ADMIN ?>?act=xoaSanPham&id=<?= $sanPham['id'] ?>" onclick="return confirm('Bạn có đồng ý xoá không')" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                        </div>
+                       
                       </td>
                     </tr>
                   <?php endforeach ?>

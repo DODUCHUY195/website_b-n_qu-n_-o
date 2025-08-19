@@ -58,7 +58,7 @@
                                             <td><?= $khachHang['so_dien_thoai'] ?></td>
                                             <td><?= $khachHang['trang_thai'] == 1 ? 'Active' : 'Inactive' ?></td>
                                             <td>
-                                                <div class="btn-group">
+                                                
                                                      <a class="btn btn-primary" href="<?= BASE_URL_ADMIN . '?act=chitietkhachhang&id_khach_hang=' . $khachHang['id'] ?>">
 
                                                         <i class="fas fa-eye"></i>
@@ -67,10 +67,10 @@
 
                                                         <i class="fas fa-wrench"></i>
                                                     </a>
-                                                    <a class="btn btn-danger" href="<?= BASE_URL_ADMIN . '?act=resetpassword&id_quan_tri=' . $khachHang['id'] ?>" onclick="return confirm('Bạn có đồng muốn reset password không')"><i class="fas fa-trash-alt"></i></a>
+                                                    <a class="btn btn-danger" href="<?= BASE_URL_ADMIN . '?act=resetpassword&id_quan_tri=' . $khachHang['id'] ?>" onclick="return confirm('Bạn có đồng muốn reset password không')"><i class="fas fa-redo-alt"></i></a>
                                                  
 
-                                                </div>
+                                               
                                             </td>
                                            
                                         </tr>

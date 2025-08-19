@@ -38,35 +38,35 @@
 
 
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">First name:</label>
+                            <label class="col-lg-3 control-label">Họ tên:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="Jane">
+                                <input class="form-control" type="text" value="">
                             </div>
 
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">Last name:</label>
-                            <div class="col-lg-12">
-                                <input class="form-control" type="text" value="Bishop">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Company:</label>
+                            <label class="col-lg-3 control-label">Email:</label>
                             <div class="col-lg-12">
                                 <input class="form-control" type="text" value="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">Email:</label>
+                            <label class="col-lg-3 control-label">SDT:</label>
                             <div class="col-lg-12">
-                                <input class="form-control" type="text" value="janesemail@gmail.com">
+                                <input class="form-control" type="text" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Địa chỉ:</label>
+                            <div class="col-lg-12">
+                                <input class="form-control" type="text" value="">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-3 control-label"></label>
                             <div class="col-md-12">
-                                <input type="submit" class="btn btn-primary" value="Save Changes">
+                                <input type="submit" class="btn btn-primary" value="Thay đổi">
 
 
                             </div>
