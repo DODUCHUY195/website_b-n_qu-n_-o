@@ -115,7 +115,7 @@
                                             <figure class="product-thumb">
                                                 <a href="<?= BASE_URL .'?act=chi-tiet-san-pham&id=' . $sanPham['id'] ?>">
                                                     <img class="pri-img" src="<?= BASE_URL_ADMIN .'uploads/'. $sanPham['hinh_anh'] ?>" alt="product">
-                                                    <img class="sec-img" src="<?= BASE_URL_ADMIN .'uploads/'. $sanPham['hinh_anh'] ?>" alt="product">
+                                                    
                                                 </a>
                                                 <div class="product-badge">
                                                     <?php 
@@ -133,9 +133,7 @@
                                                         </div>
                                                     <?php } ?>
 
-                                                    <div class="product-label new">
-                                                        <span>Mới</span>
-                                                    </div>
+                                                   
                                                     
                                                 </div>
                                                 

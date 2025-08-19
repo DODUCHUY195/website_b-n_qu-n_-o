@@ -25,7 +25,7 @@
                                     <!-- main menu navbar start -->
                                     <nav class="desktop-menu">
                                         <ul>
-                                            <li class="active"><a href="index.html">Trang chủ </i></a>
+                                            <li class="active"><a href="<?= BASE_URL ?>">Trang chủ </i></a>
                                             <li><a href="blog-left-sidebar.html">Sản phẩm <i class="fa fa-angle-down"></i></a>
                                                 <ul class="dropdown">
                                                     <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
