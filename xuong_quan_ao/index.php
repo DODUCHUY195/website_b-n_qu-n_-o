@@ -8,8 +8,6 @@ $act = $_GET['act'] ?? '/';
 
 match($act){
     '/' => (new HomeController()) ->home(),
-   
-    
     'chi-tiet-san-pham' => (new HomeController()) -> chiTietSanPham(),
 }
 ?>

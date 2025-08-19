@@ -11,9 +11,9 @@
                         <!-- start logo area -->
                         <div class="col-lg-2">
                             <div class="logo">
-                                <!-- <a href="<?= BASE_URL ?>">
-                                    <img src="assets/img/logo/logo.png" alt="Brand Logo">
-                                </a> -->
+                                <a href="<?= BASE_URL ?>">
+                                    <img src="assets/img/logo/logo.png" alt="Brand Logo" style="width:100px;">
+                                </a>
                             </div>
                         </div>
                         <!-- start logo area -->

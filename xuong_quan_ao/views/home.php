@@ -113,21 +113,49 @@
                                         <!-- product item start -->
                                         <div class="product-item">
                                             <figure class="product-thumb">
-                                                <a href="#">
-                                                    <img class="pri-img" src="<?= BASE_URL_ADMIN .  'uploads/'. $sanPham['hinh_anh'] ?>" style="width:100px">
-                                                  
+                                                <a href="<?= BASE_URL .'?act=chi-tiet-san-pham&id=' . $sanPham['id'] ?>">
+                                                    <img class="pri-img" src="<?= BASE_URL_ADMIN .'uploads/'. $sanPham['hinh_anh'] ?>" alt="product">
+                                                    <img class="sec-img" src="<?= BASE_URL_ADMIN .'uploads/'. $sanPham['hinh_anh'] ?>" alt="product">
                                                 </a>
-                                               
-                                                <div><?= $sanPham['ten_san_pham']?></div>
-                                                <div>Giá: <?= $sanPham['gia_san_pham']?></div>
+                                                <div class="product-badge">
+                                                    <?php 
+                                                        $ngayNhap = new DateTime($sanPham['ngay_nhap']);
+                                                        $ngayHienTai = new DateTime();
+                                                        $tinhNgay = $ngayHienTai->diff($ngayNhap)->days;
+                                                        if ($tinhNgay <= 7) { ?>
+                                                        <div class="product-label new">
+                                                            <span>Mới</span>
+                                                            
+                                                    <?php } ?>        
+                                                    <?php if ($sanPham['gia_khuyen_mai']) { ?>
+                                                        <div class="product-label discount">
+                                                            <span>Giảm giá</span>
+                                                        </div>
+                                                    <?php } ?>
 
-                                                
+                                                    <div class="product-label new">
+                                                        <span>Mới</span>
+                                                    </div>
+                                                    
+                                                </div>
                                                 
                                                 <div class="cart-hover">
                                                     <button class="btn btn-cart">Xem chi tiết</button>
                                                 </div>
                                             </figure>
-                                            
+                                            <div class="product-caption">
+                                                <h6 class="product-name">
+                                                    <a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id=' . $sanPham['id'] ?>"><?= $sanPham['ten_san_pham'] ?></a>
+                                                </h6>
+                                                <div class="price-box">
+                                                    <?php if ($sanPham['gia_khuyen_mai']) { ?>
+                                                        <span class="price-regular"><?= formatPrice($sanPham['gia_khuyen_mai']).'d' ?> </span>
+                                                        <span class="price-old"><del><?= formatPrice($sanPham['gia_san_pham']).'d' ?> </del></span>
+                                                    <?php } else { ?>
+                                                        <span class="price-regular"><?= formatPrice($sanPham['gia_san_pham']).'d' ?> </span>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
                                         </div>
                                         <!-- product item end -->
                                         <?php endforeach; ?>
@@ -140,10 +168,23 @@
                 </div>
             </div>
         </section>
-      
+        <!-- product area end -->
+
+        
+
         
 
        
+
+                            
+
+        
+
+        
+
+        
+
+        
     </main>
 
     <?php require_once './views/layout/footer.php'; ?>

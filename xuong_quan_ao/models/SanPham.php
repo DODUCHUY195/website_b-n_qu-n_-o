@@ -30,7 +30,7 @@ class SanPham{
         }
         
     }
-    public function getDetailSanPham($id)
+     public function getDetailSanPham($id)
     {
         $stmt = $this->conn->prepare("SELECT * FROM san_phams WHERE id = ?");
         $stmt->execute([$id]);
