@@ -78,15 +78,19 @@
                                         </div>
                                         <p class="pro-desc">
                                            <?= $sanPham['mo_ta']?></p>
-                                        <div class="quantity-cart-box d-flex align-items-center">
+                                           <form action="<?= BASE_URL.'?act=themgiohang'?>" method="post">
+                                            <div class="quantity-cart-box d-flex align-items-center">
                                             <h6 class="option-title">Số lượng:</h6>
                                             <div class="quantity">
-                                                <div class="pro-qty"><input type="text" value="1"></div>
+                                                <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'];?>">
+                                                <div class="pro-qty"><input type="text" value="1" name="so_luong"></div>
                                             </div>
                                             <div class="action_link">
-                                                <a class="btn btn-cart2" href="#">Thêm vào giỏ hàng</a>
+                                                <button class="btn btn-cart2" >Thêm vào giỏ hàng</button>
                                             </div>
                                         </div>
+                                           </form>
+                                        
                                        
                                        
                                         
@@ -118,7 +122,7 @@
                                                         <div class="rev-avatar">
                                                             <img src="<?= $binhLuan['anh_dai_dien']?>" alt="failed">
                                                         </div>
-                                                        <p>:<?= $binhLuan['noi_dung']?></p>
+                                                        <p><?= $binhLuan['ho_ten']?>:<?= $binhLuan['noi_dung']?></p>
                                                     </div>
                                                    <?php endforeach ?>
                                                     <form action="#" class="review-form">
@@ -229,5 +233,5 @@
     </main>
 
 
-
-    <?php require_once './views/layout/footer.php'; ?>
+<?php require_once 'layout/miniCart.php'; ?>
+    <?php require_once 'layout/footer.php'; ?>

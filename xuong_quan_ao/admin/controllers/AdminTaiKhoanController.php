@@ -225,8 +225,7 @@ class AdminTaiKhoanController
 
             $user = $this->modelTaiKhoan->checkLogin($email, $password);
             if (is_array($user)) {
-
-                $_SESSION['user_admin'] = is_array($user);
+                $_SESSION['user_admin'] = $user;
 
                 header("Location:" . BASE_URL_ADMIN);
                 exit();

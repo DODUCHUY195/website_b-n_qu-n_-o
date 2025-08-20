@@ -1,5 +1,5 @@
 <?php
-define('BASE_URL', 'http://localhost/xuong_quan_ao/xuong_quan_ao');
+define('BASE_URL', 'http://localhost/xuong_quan_ao/xuong_quan_ao/');
 define('BASE_URL_ADMIN', 'http://localhost/xuong_quan_ao/xuong_quan_ao/admin/');
 
 define('DB_HOST','localhost');
