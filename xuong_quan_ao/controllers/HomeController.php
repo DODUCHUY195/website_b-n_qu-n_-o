@@ -5,6 +5,8 @@ class HomeController
     public $modelTaiKhoan;
     public $modelGioHang;
     public $modelDonHang;
+    public $modelDanhMuc;
+
 
 
 
@@ -15,12 +17,28 @@ class HomeController
         $this->modelTaiKhoan = new TaiKhoan();
         $this->modelGioHang = new GioHang();
         $this->modelDonHang = new DonHang();
+        $this->modelDanhMuc = new DanhMuc();
     }
-    public function home()
-    {
-        $listSanPham = $this->modelSanPham->getAllSanPham();
-        require_once './views/home.php';
+
+ public function home()
+{
+    $id = $_GET['id'] ?? null;
+
+    if ($id) {
+        // Nếu có id → hiển thị album ảnh sản phẩm
+        $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
+    } else {
+        // Nếu không có id → lấy ảnh đại diện sản phẩm để làm slideshow
+        $listAnhSanPham = $this->modelSanPham->getAllAnhDaiDienSanPham();
     }
+
+    $listSanPham = $this->modelSanPham->getAllSanPham();
+    require_once './views/home.php';
+}
+
+
+
+
 
     public function chiTietSanPham()
     {
@@ -42,12 +60,14 @@ class HomeController
         }
     }
 
+
     public function FormLogin()
     {
         require_once './views/auth/formLogin.php';
         deleteSessionError();
         exit();
     }
+
 
     public function Login()
     {
@@ -72,6 +92,7 @@ class HomeController
             }
         }
     }
+
 
     public function addGioHang()
     {
@@ -109,6 +130,7 @@ class HomeController
     }
 
 
+
     public function GioHang()
     {
         if ($_SESSION['user_client']) {
@@ -130,6 +152,7 @@ class HomeController
         }
     }
 
+
     public function ThanhToan()
     {
         if ($_SESSION['user_client']) {
@@ -149,6 +172,7 @@ class HomeController
             var_dump("Chưa đăng nhập");
         }
     }
+
 
     public function PostThanhToan()
     {
@@ -208,6 +232,8 @@ class HomeController
         }
     }
 
+
+
     public function lichSuMuaHang()
     {
         if ((isset($_SESSION['user_client']))) {
@@ -226,33 +252,38 @@ class HomeController
         }
     }
 
-    public function chiTietMuaHang() {
+
+
+    public function chiTietMuaHang()
+    {
         if ((isset($_SESSION['user_client']))) {
             $user = $_SESSION['user_client'];
             $tai_khoan_id = $user['id'];
 
             $donHangId = $_GET['id'];
-            
-             $arrTrangThaiDonHang  = $this->modelDonHang->getTrangThaiDonHang();
+
+            $arrTrangThaiDonHang  = $this->modelDonHang->getTrangThaiDonHang();
             $trangThaiDonHang = array_column($arrTrangThaiDonHang, 'ten_trang_thai', 'id');
 
             $arrPhuongThucThanhToan  = $this->modelDonHang->getPhuongThucThanhToan();
             $phuongThucThanhToan = array_column($arrPhuongThucThanhToan, 'ten_phuong_thuc', 'id');
-           
+
             $donHang = $this->modelDonHang->getDonHangsByID($donHangId);
 
             $chiTietDonHang = $this->modelDonHang->getChiTietDonHangByDonHangId($donHangId);
-       
-            if($donHang['tai_khoan_id'] != $tai_khoan_id){
+
+            if ($donHang['tai_khoan_id'] != $tai_khoan_id) {
                 echo 'Bạn k có quyền truy cập đơn hàng này!';
                 exit();
             }
 
             require_once './views/chitietmuahang.php';
-        }  else {
+        } else {
             var_dump('Chưa đăng nhập');
         }
     }
+
+
 
     public function huyDonHang()
     {
@@ -277,5 +308,50 @@ class HomeController
         } else {
             var_dump('Chưa đăng nhập');
         }
+    }
+
+
+
+    public function logout()
+    {
+        if (isset($_SESSION['user_client'])) {
+            unset($_SESSION['user_client']);
+            header("Location: " . BASE_URL . '?act=login');
+        }
+    }
+
+
+
+    public function delete()
+    {
+
+        if (!isset($_SESSION['user_client'])) {
+            header("Location: " . BASE_URL . "?act=login");
+            exit();
+        }
+
+        $user = $_SESSION['user_client'];
+        $tai_khoan_id = $user['id'];
+
+        $chi_tiet_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+        if ($chi_tiet_id > 0) {
+            $this->modelGioHang->deleteItem($chi_tiet_id, $tai_khoan_id);
+        }
+
+        header("Location: " . BASE_URL . "?act=giohang");
+        exit();
+    }
+
+
+
+
+    public function sanPham()
+    {
+
+        $listDanhMuc = $this->modelDanhMuc->getAllDanhMuc();
+        $listSanPham = $this->modelSanPham->getAllSanPham();
+
+        require_once './views/sanPham.php';
     }
 }

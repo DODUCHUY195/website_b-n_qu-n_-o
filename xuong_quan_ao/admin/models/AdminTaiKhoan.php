@@ -118,8 +118,8 @@ class AdminTaiKhoan
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':email' => $email]);
             $user = $stmt->fetch();
-            
-            
+
+
             if (is_array($user) && password_verify($mat_khau, $user['mat_khau'])) {
                 if ($user['chuc_vu_id'] == 1) {
                     if ($user['trang_thai'] == 1) {
@@ -141,18 +141,39 @@ class AdminTaiKhoan
     public function getTaiKhoanFromEmail($email)
     {
         try {
-            $sql = 'SELECT * FROM tai_khoans WHERE email= :email';
+            $sql = 'SELECT * FROM tai_khoans WHERE email = :email';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':email' => $email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             return $user ?: null;
-        
-       
         } catch (Exception $e) {
-            echo 'loi' . $e->getMessage();
-           return null;
+            error_log("Lỗi lấy tài khoản: " . $e->getMessage());
+            return null;
         }
     }
 
-    
+    public function updateThongTinCaNhan($email, $data)
+    {
+        $sql = "UPDATE tai_khoans 
+                SET ho_ten = :ho_ten, so_dien_thoai = :so_dien_thoai, dia_chi = :dia_chi, anh_dai_dien = :anh_dai_dien
+                WHERE email = :email";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([
+            ':ho_ten' => $data['ho_ten'],
+            ':so_dien_thoai' => $data['so_dien_thoai'],
+            ':dia_chi' => $data['dia_chi'],
+            ':anh_dai_dien' => $data['anh_dai_dien'],
+            ':email' => $email
+        ]);
+    }
+
+    public function doiMatKhau($email, $matKhauMoi)
+    {
+        $sql = "UPDATE tai_khoans SET mat_khau = :mat_khau WHERE email = :email";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([
+            ':mat_khau' => password_hash($matKhauMoi, PASSWORD_DEFAULT),
+            ':email' => $email
+        ]);
+    }
 }

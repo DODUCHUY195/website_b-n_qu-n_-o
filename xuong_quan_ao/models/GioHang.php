@@ -120,4 +120,17 @@ class GioHang
             echo "Lỗi " . $e->getMessage();
         }
     }
+
+   public function deleteItem($chi_tiet_id, $tai_khoan_id) {
+        $sql = "DELETE chi_tiet_don_hangs FROM chi_tiet_gio_hangs
+                INNER JOIN gio_hangs ON chi_tiet_don_hangs.gio_hang_id = gio_hangs.id
+                WHERE chi_tiet_don_hangs.id = :id AND gio_hangs.tai_khoan_id = :tai_khoan_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            ':id'  => $chi_tiet_id,
+            ':tai_khoan_id' => $tai_khoan_id
+        ]);
+        return $stmt->rowCount() > 0;
+    }
+
 }

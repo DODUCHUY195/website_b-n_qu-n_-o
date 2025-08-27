@@ -44,38 +44,42 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                     $tongGioHang = 0;
+                                    $tongGioHang = 0;
                                     foreach ($chiTietGioHang as $key => $sanPham):
-                                       
-                                        ?>
-                                        
+
+                                    ?>
+
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="<?= BASE_URL_ADMIN . 'uploads/' . $sanPham['hinh_anh'] ?>" alt="Product" /></a></td>
+                                            <td class="pro-thumbnail"><img class="img-fluid" src="<?= BASE_URL_ADMIN . 'uploads/' . $sanPham['hinh_anh'] ?>" alt="Product" /></td>
                                             <td class="pro-title"><a href="#"><?= $sanPham['ten_san_pham'] ?></a></td>
                                             <td class="pro-price"><span>
                                                     <?php if ($sanPham['gia_khuyen_mai']) { ?>
                                                         <?= formatPrice($sanPham['gia_khuyen_mai']) . 'đ' ?>
-                                        <?php } else { ?>
-                                            <?= formatPrice($sanPham['gia_san_pham']) . 'đ' ?>
-                                        <?php } ?>
-                                        </span></td>
-                                        <td class="pro-quantity">
+                                                    <?php } else { ?>
+                                                        <?= formatPrice($sanPham['gia_san_pham']) . 'đ' ?>
+                                                    <?php } ?>
+                                                </span></td>
+                                            <td class="pro-quantity">
 
-                                            <div class="pro-qty"><input type="text" value="<?= $sanPham['so_luong']?>"></div>
-                                        </td>
-                                        <td class="pro-subtotal"><span>
-                                            <?php
-                                            $tongTien = 0;
-                                                if($sanPham['gia_khuyen_mai']){
-                                                    $tongTien = $sanPham['gia_khuyen_mai'] * $sanPham['so_luong'];
-                                                }else{
-                                                     $tongTien = $sanPham['gia_san_pham'] * $sanPham['so_luong'];
-                                                }
-                                                $tongGioHang += $tongTien;
-                                                echo formatPrice($tongTien) .'đ';
-                                            ?>
-                                        </span></td>
-                                        <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                                <div class="pro-qty"><input type="text" value="<?= $sanPham['so_luong'] ?>"></div>
+                                            </td>
+                                            <td class="pro-subtotal"><span>
+                                                    <?php
+                                                    $tongTien = 0;
+                                                    if ($sanPham['gia_khuyen_mai']) {
+                                                        $tongTien = $sanPham['gia_khuyen_mai'] * $sanPham['so_luong'];
+                                                    } else {
+                                                        $tongTien = $sanPham['gia_san_pham'] * $sanPham['so_luong'];
+                                                    }
+                                                    $tongGioHang += $tongTien;
+                                                    echo formatPrice($tongTien) . 'đ';
+                                                    ?>
+                                                </span></td>
+                                            <td>
+
+                                                <a href="<?= BASE_URL ?>?act=xoagiohang&id=<?= $sanPham['id'] ?>"
+                                                    onclick="return confirm('Bạn có đồng ý xoá không?')">Xoá</a>
+                                            </td>
                                         </tr>
 
                                     <?php endforeach ?>
@@ -106,7 +110,7 @@
                                     <table class="table">
                                         <tr>
                                             <td>Tổng tiền sản phẩm</td>
-                                            <td><?=formatPrice($tongGioHang). 'đ'?></td>
+                                            <td><?= formatPrice($tongGioHang) . 'đ' ?></td>
                                         </tr>
                                         <tr>
                                             <td>Vận chuyển</td>
@@ -114,12 +118,12 @@
                                         </tr>
                                         <tr class="total">
                                             <td>Tổng thanh toán</td>
-                                            <td class="total-amount"><?=formatPrice($tongGioHang +30000). 'đ'?></td>
+                                            <td class="total-amount"><?= formatPrice($tongGioHang + 30000) . 'đ' ?></td>
                                         </tr>
                                     </table>
                                 </div>
                             </div>
-                            <a href="<?= BASE_URL . '?act=thanhtoan'?>" class="btn btn-sqr d-block"> Tiến hành đặt hàng</a>
+                            <a href="<?= BASE_URL . '?act=thanhtoan' ?>" class="btn btn-sqr d-block"> Tiến hành đặt hàng</a>
                         </div>
                     </div>
                 </div>

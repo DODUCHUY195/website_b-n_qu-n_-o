@@ -248,86 +248,70 @@ class AdminTaiKhoanController
     }
 
 
+    // Hiển thị form chỉnh sửa
     public function formEditCaNhanQuanTri()
     {
-        $email = $_SESSION['user_admin'];
+        // if (empty($_SESSION['user_admin'])) {
+        //     header("Location: " . BASE_URL_ADMIN . "?act=login");
+        //     exit();
+        // }
+        $user = $_SESSION['user_admin'];
+        $ThongTin = $this->modelTaiKhoan->getTaiKhoanFromEmail($user);
+        // var_dump($user);die;
+       
+        // if (!$thongTin) {
+        //     unset($_SESSION['user_admin']);
+        //     header("Location: " . BASE_URL_ADMIN . "?act=login");
+        //     exit();
+        // }
 
-        $thongTin = $this->modelTaiKhoan->getTaiKhoanFromEmail($email);
-        // var_dump($thongTin);
-        // die;
         require_once './views/taikhoan/canhan/editCaNhan.php';
     }
 
-    public function postEditCaNhanQuanTri() {}
-    public function postEditMatKhauCaNhan()
+    // Xử lý update thông tin cá nhân
+    public function updateThongTinCaNhan()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $old_pass     = $_POST['old_pass'] ?? '';
-            $new_pass     = $_POST['new_pass'] ?? '';
-            $confirm_pass = $_POST['confirm_pass'] ?? '';
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_SESSION['user_admin'];
+            $data = [
+                'ho_ten' => $_POST['ho_ten'],
+                'so_dien_thoai' => $_POST['so_dien_thoai'],
+                'dia_chi' => $_POST['dia_chi'],
+                'anh_dai_dien' => $_POST['anh_dai_dien'] ?? ''
+            ];
 
-            $errors = [];
+           $this->modelTaiKhoan->updateThongTinCaNhan($email, $data);
+            header("Location: " . BASE_URL_ADMIN . "?act=suathongtincanhan");
+            exit();
+        }
+    }
 
-            // Lấy thông tin user từ session
-            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_admin'] ?? '');
-            if ($user === null) {
-                echo "Không tìm thấy tài khoản!";
-            } else {
-                echo "Tên tài khoản: " . $user['ho_ten'];
-            }
-            // if (!$user || !is_array($user)) {
-            //     $_SESSION['error'] = ['account' => 'Không tìm thấy tài khoản'];
-            //     $_SESSION['flash'] = true;
-            //     header("Location: " . BASE_URL_ADMIN . '?act=formsuathongtincanhan');
-            //     exit();
-            // }
+    // Xử lý đổi mật khẩu
+    public function doiMatKhauCaNhan()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_SESSION['user_admin'];
+            $old_pass = $_POST['old_pass'];
+            $new_pass = $_POST['new_pass'];
+            $confirm_pass = $_POST['confirm_pass'];
 
-            // Kiểm tra mật khẩu cũ
-            if (empty($old_pass)) {
-                $errors['old_pass'] = 'Mật khẩu cũ không được để trống';
-                
-            } else if (!password_verify($old_pass, $user['old_pass'])) {
-                $errors['old_pass'] = 'Mật khẩu cũ không chính xác';
-                
-                
-            }
+            $user = $this->modelTaiKhoan->getTaiKhoanFromEmail($email);
 
-
-
-
-            // Kiểm tra mật khẩu mới
-            if (empty($new_pass)) {
-                $errors['new_pass'] = 'Mật khẩu mới không được để trống';
-            }
-
-            // Xác nhận mật khẩu
-            if (empty($confirm_pass)) {
-                $errors['confirm_pass'] = 'Vui lòng nhập lại mật khẩu mới';
-            } elseif ($new_pass !== $confirm_pass) {
-                $errors['confirm_pass'] = 'Mật khẩu nhập lại không khớp';
-            }
-
-            // Nếu có lỗi thì lưu vào session và quay lại form
-            if (!empty($errors)) {
-                $_SESSION['error'] = $errors;
-                $_SESSION['flash'] = true;
-                header("Location: " . BASE_URL_ADMIN . '?act=formsuathongtincanhan');
+            if (!$user || !password_verify($old_pass, $user['mat_khau'])) {
+                $_SESSION['error']['old_pass'] = "Mật khẩu cũ không đúng!";
+                header("Location: " . BASE_URL_ADMIN . "?act=suamatkhaucanhan");
                 exit();
             }
 
-            // Cập nhật mật khẩu mới
-            $hashPass = password_hash($new_pass, PASSWORD_BCRYPT);
-            
-            $status   = $this->modelTaiKhoan->resetPasswordHash($user['id'], $hashPass);
-            
-            if ($status) {
-                $_SESSION['success'] = 'Đổi mật khẩu thành công';
-            } else {
-                $_SESSION['error'] = ['system' => 'Đổi mật khẩu thất bại'];
+            if ($new_pass !== $confirm_pass) {
+                $_SESSION['error']['confirm_pass'] = "Mật khẩu nhập lại không khớp!";
+                header("Location: " . BASE_URL_ADMIN . "?act=suamatkhaucanhan");
+                exit();
             }
-            
-            $_SESSION['flash'] = true;
-            header("Location: " . BASE_URL_ADMIN . '?act=formsuathongtincanhan');
+
+            $this->modelTaiKhoan->doiMatKhau($email, $new_pass);
+            $_SESSION['success'] = "Đổi mật khẩu thành công!";
+            header("Location: " . BASE_URL_ADMIN . "?act=suamatkhaucanhan");
             exit();
         }
     }

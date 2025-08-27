@@ -9,6 +9,8 @@ require_once './models/SanPham.php';
 require_once './models/TaiKhoan.php';
 require_once './models/GioHang.php';
 require_once './models/DonHang.php';
+require_once './models/DanhMuc.php';
+
 
 
 
@@ -25,8 +27,12 @@ match ($act) {
     'xu_ly_thanh_toan' => (new HomeController())->PostThanhToan(),
     'lichsumuahang' => (new HomeController())->lichSuMuaHang(),
     'chitietmuahang' => (new HomeController())->chiTietMuaHang(),
-    'huydonhang' => (new HomeController())->huyDonHang()
+    'xoagiohang' => (new HomeController())->delete(),
+    'huydonhang' => (new HomeController())->huyDonHang(),
+    'sanpham' => (new HomeController())->sanPham(),
 
-
+   
+    
+    'logout'=>(new HomeController())->logout(),
 }
 ?>

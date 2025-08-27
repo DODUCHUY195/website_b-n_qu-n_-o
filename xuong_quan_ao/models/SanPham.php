@@ -30,18 +30,33 @@ class SanPham{
         }
         
     }
+
+
      public function getDetailSanPham($id)
     {
         $stmt = $this->conn->prepare("SELECT * FROM san_phams WHERE id = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+
     public function getListAnhSanPham($san_pham_id)
     {
         $stmt = $this->conn->prepare("SELECT * FROM hinh_anh_san_phams WHERE san_pham_id = ?");
         $stmt->execute([$san_pham_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+public function getAllAnhDaiDienSanPham()
+{
+    $stmt = $this->conn->prepare("SELECT id, hinh_anh FROM san_phams");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+
     public function getBinhLuanFromSanPham($id)
     {
         try {
@@ -58,6 +73,8 @@ class SanPham{
         }
     }
 
+
+    
      public function getAllDanhMuc()
     {
         try {
@@ -97,4 +114,6 @@ class SanPham{
             echo 'loi' . $e->getMessage();
         }
     }
+
+    
 }

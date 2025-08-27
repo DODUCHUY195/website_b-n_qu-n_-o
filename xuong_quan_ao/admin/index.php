@@ -78,10 +78,10 @@ match ($act) {
 
 
 
-    //route quan lt tai khoan ca nhan
+    //route quan ly tai khoan ca nhan
     'formsuathongtincanhan'=> (new AdminTaiKhoanController())->formEditCaNhanQuanTri(),
-    'suathongtincanhan'=> (new AdminTaiKhoanController())->postEditCaNhanQuanTri(),
-    'suamatkhaucanhan'=> (new AdminTaiKhoanController())->postEditMatKhauCaNhan(),
+    'suathongtincanhan'=> (new AdminTaiKhoanController())->updateThongTinCaNhan(),
+    'suamatkhaucanhan'=> (new AdminTaiKhoanController())->doiMatKhauCaNhan(),
 
 
 

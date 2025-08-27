@@ -26,7 +26,7 @@
                                 <nav class="desktop-menu">
                                     <ul>
                                         <li class="active"><a href="<?= BASE_URL ?>">Trang chủ </i></a>
-                                        <li><a href="blog-left-sidebar.html">Sản phẩm <i class="fa fa-angle-down"></i></a>
+                                        <li><a href="<?= BASE_URL .'?act=sanpham'?>">Sản phẩm <i class="fa fa-angle-down"></i></a>
                                             <ul class="dropdown">
                                                 <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
 
@@ -45,48 +45,53 @@
                     <!-- mini cart area start -->
                     <div class="col-lg-4">
                         <div class="header-right d-flex align-items-center justify-content-end">
-                            
-
-                                <div class="header-search-container">
-                                    <button class="search-trigger d-block"><i class="pe-7s-search"></i></button>
-                                    <form class="header-search-box d-none">
-                                        <input type="text" placeholder="Nhập tên sản phẩm" class="header-search-field">
-                                        <button class="header-search-btn"><i class="pe-7s-search"></i></button>
-                                    </form>
-                                </div>
-                                <div class="header-configure-area">
-                                    <ul class="nav justify-content-end">
-                                        <label for="">
-                                            <?php
-                                            if (isset($_SESSION['user_client'])) {
-                                                echo $_SESSION['user_client']['ho_ten'];
-                                            }
-                                            ?>
-                                        </label>
-                                        <li class="user-hover">
-                                            <a href="#">
-                                                <i class="pe-7s-user"></i>
-                                            </a>
-                                            <ul class="dropdown-list">
-                                                <?php if (!isset($_SESSION['user_client'])) { ?>
-                                                    <li><a href="<?= BASE_URL . '?act=login' ?>">Đăng nhập</a></li>
-                                                <?php } else { ?>
-                                                    <li><a href="#">Tài khoản</a></li>
-                                                    <li><a href="<?= BASE_URL . '?act=lichsumuahang' ?>">Đơn hàng</a></li>
-                                                <?php } ?>
 
 
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="minicart-btn">
-                                                <i class="pe-7s-shopbag"></i>
-                                                <div class="notification">2</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            
+                            <div class="header-search-container">
+                                <button class="search-trigger d-block"><i class="pe-7s-search"></i></button>
+                                <form class="header-search-box d-none">
+                                    <input type="text" placeholder="Nhập tên sản phẩm" class="header-search-field">
+                                    <button class="header-search-btn"><i class="pe-7s-search"></i></button>
+                                </form>
+                            </div>
+                            <div class="header-configure-area">
+                                <ul class="nav justify-content-end">
+                                    <label for="">
+                                        <?php
+                                        if (isset($_SESSION['user_client'])) {
+                                            echo $_SESSION['user_client']['ho_ten'];
+                                        }
+                                        ?>
+                                    </label>
+                                    <li class="user-hover">
+                                        <a href="#">
+                                            <i class="pe-7s-user"></i>
+                                        </a>
+                                        <ul class="dropdown-list">
+                                            <?php if (!isset($_SESSION['user_client'])) { ?>
+                                                <li><a href="<?= BASE_URL . '?act=login' ?>">Đăng nhập</a></li>
+                                            <?php } else { ?>
+                                                <li><a href="#">Tài khoản</a></li>
+                                                <li><a href="<?= BASE_URL . '?act=lichsumuahang' ?>">Đơn hàng</a></li>
+                                                <li class="nav-item">
+                                                    <a href="<?= BASE_URL . '?act=logout' ?>" class="nav-link" onclick="return confirm('Bạn có muốn đăng xuất tài khoản không?')">
+                                                        Đăng xuất
+                                                    </a>
+                                                </li>
+                                            <?php } ?>
+
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="minicart-btn">
+                                            <i class="pe-7s-shopbag"></i>
+                                            <div class="notification">2</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
                     <!-- mini cart area end -->
